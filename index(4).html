@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIVE+ 1.0</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="brand">VIVE<span>+</span></div>
+        <div class="greeting">Tu bienestar, un día a la vez</div>
+      </div>
+      <div class="avatar">R</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">MI PROGRESO</p>
+        <h1>¡Vamos con todo! 💪</h1>
+        <p class="muted">Hoy llevas <strong id="progressText">60%</strong> de tu objetivo.</p>
+      </div>
+      <div class="level-card">
+        <span>NIVEL</span>
+        <strong id="level">3</strong>
+      </div>
+    </section>
+
+    <div class="progress"><div id="progressBar"></div></div>
+
+    <section class="stats">
+      <div class="stat"><span>🔥</span><strong id="streak">7</strong><small>Racha</small></div>
+      <div class="stat"><span>⭐</span><strong id="points">850</strong><small>Puntos</small></div>
+      <div class="stat"><span>🏅</span><strong>12</strong><small>Insignias</small></div>
+    </section>
+
+    <section class="section-title">
+      <div>
+        <p class="eyebrow">HOY</p>
+        <h2>Tus hábitos</h2>
+      </div>
+      <button class="link-btn" onclick="resetDay()">Reiniciar</button>
+    </section>
+
+    <section class="habits">
+      <button class="habit" data-points="20" onclick="completeHabit(this, 'Actividad')">
+        <span class="icon activity">🏃</span>
+        <span><b>Actividad física</b><small>30 min de movimiento</small></span>
+        <span class="check">＋20</span>
+      </button>
+
+      <button class="habit" data-points="15" onclick="completeHabit(this, 'Hidratación')">
+        <span class="icon water">💧</span>
+        <span><b>Hidratación</b><small>Meta: 6 vasos</small></span>
+        <span class="check">＋15</span>
+      </button>
+
+      <button class="habit" data-points="20" onclick="completeHabit(this, 'Alimentación')">
+        <span class="icon food">🥗</span>
+        <span><b>Alimentación</b><small>Registrar una comida saludable</small></span>
+        <span class="check">＋20</span>
+      </button>
+
+      <button class="habit" data-points="15" onclick="completeHabit(this, 'Sueño')">
+        <span class="icon sleep">😴</span>
+        <span><b>Sueño</b><small>Registrar tu descanso</small></span>
+        <span class="check">＋15</span>
+      </button>
+    </section>
+
+    <section class="mission">
+      <div class="mission-icon">🎯</div>
+      <div>
+        <p class="eyebrow">MISIÓN DEL DÍA</p>
+        <h3>Completa 3 hábitos</h3>
+        <p class="muted">Consigue puntos y mantén tu racha.</p>
+      </div>
+      <span id="missionCount">0/3</span>
+    </section>
+
+    <nav class="bottom-nav">
+      <button class="active"><span>🏠</span>Inicio</button>
+      <button onclick="showMessage('Actividad')"><span>🏃</span>Actividad</button>
+      <button onclick="showMessage('Misiones')"><span>🎯</span>Misiones</button>
+      <button onclick="showMessage('Ranking')"><span>🏆</span>Ranking</button>
+      <button onclick="showMessage('Perfil')"><span>👤</span>Perfil</button>
+    </nav>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
