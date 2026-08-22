@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071526">
-<title>VIVE+ | Bienestar integral</title>
+<title>VIVE+ PLUS 2.0 | Bienestar integral</title>
 <style>
 :root{
   --bg:#061321;--panel:#0c1d30;--panel2:#10263c;--line:#1c3852;
@@ -13,14 +13,17 @@
   --shadow:0 18px 50px rgba(0,0,0,.28);
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;background:radial-gradient(circle at 75% 0%,#12304d 0,#061321 38%,#040d17 100%);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
 button{font:inherit}
+button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 .app{display:grid;grid-template-columns:235px 1fr;min-height:100vh}
 .sidebar{padding:28px 18px;border-right:1px solid var(--line);background:rgba(5,17,29,.78);backdrop-filter:blur(14px);position:sticky;top:0;height:100vh}
 .logo{font-size:30px;font-weight:900;letter-spacing:-1.5px;color:var(--cyan);margin:0 10px 5px}
 .logo span{color:#fff}
 .tag{color:var(--muted);font-size:12px;margin:0 10px 28px}
-.nav{display:grid;gap:8px}.nav button{border:0;background:transparent;color:#9bb0c4;text-align:left;padding:13px 14px;border-radius:12px;cursor:pointer;display:flex;gap:12px;align-items:center}
+.nav{display:grid;gap:8px}
+.nav button{border:0;background:transparent;color:#9bb0c4;text-align:left;padding:13px 14px;border-radius:12px;cursor:pointer;display:flex;gap:12px;align-items:center}
 .nav button:hover,.nav button.active{background:linear-gradient(90deg,#12395e,#10263d);color:white;box-shadow:inset 3px 0 var(--cyan)}
 .nav i{font-style:normal;width:20px;text-align:center}
 .sidebar-bottom{position:absolute;left:18px;right:18px;bottom:22px;color:#7890a6;font-size:11px;text-align:center}
@@ -31,8 +34,8 @@ h1{font-size:31px;margin:4px 0 0;letter-spacing:-1px}
 .profile{display:flex;align-items:center;gap:10px;background:#0c2033;border:1px solid var(--line);padding:8px 12px;border-radius:16px}
 .avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#1ccce1,#2574ff);font-weight:900}
 .profile small{display:block;color:var(--muted)}
-.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:18px;margin-bottom:20px}
 .card{background:linear-gradient(145deg,rgba(15,38,60,.96),rgba(8,25,41,.96));border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:18px;margin-bottom:20px}
 .hero-main{padding:27px;position:relative;overflow:hidden}
 .hero-main:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-80px;top:-100px;background:radial-gradient(circle,rgba(24,213,232,.18),transparent 65%)}
 .hero h2{font-size:34px;max-width:600px;margin:8px 0 10px}
@@ -45,7 +48,9 @@ h1{font-size:31px;margin:4px 0 0;letter-spacing:-1px}
 .section-title{display:flex;align-items:end;justify-content:space-between;margin:28px 2px 12px}
 .section-title h3{margin:0;font-size:19px}.section-title span{color:var(--cyan);font-size:12px}
 .habits{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.habit{padding:17px;min-height:145px}
+.habit{padding:17px;min-height:145px;cursor:pointer;transition:.18s transform,.18s border-color}
+.habit:hover{transform:translateY(-3px);border-color:#2d638a}
+.clickable-card{cursor:pointer;transition:.18s transform,.18s border-color}.clickable-card:hover{transform:translateY(-3px);border-color:#2d638a}
 .icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:21px;margin-bottom:13px}
 .habit h4{margin:0 0 5px}.habit p{margin:0;color:var(--muted);font-size:12px}
 .bar{height:6px;background:#183148;border-radius:10px;margin-top:14px;overflow:hidden}.bar span{display:block;height:100%;border-radius:10px}
@@ -58,17 +63,123 @@ h1{font-size:31px;margin:4px 0 0;letter-spacing:-1px}
 .people{display:flex;align-items:center}.mini{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#163958;border:2px solid #0c1d30;margin-left:-7px;font-size:11px}
 .people .mini:first-child{margin-left:0}
 .chart{height:130px;display:flex;align-items:end;gap:10px;padding-top:20px}.col{flex:1;background:linear-gradient(to top,#18d5e8,#3988ff);border-radius:7px 7px 2px 2px;min-height:20px;opacity:.9}.days{display:flex;gap:10px;color:var(--muted);font-size:10px}.days span{flex:1;text-align:center}
+
+/* Pantallas de módulos */
+.screen{display:none;animation:fadeIn .22s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.screen-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.back-btn{border:1px solid var(--line);background:#0c2033;color:white;border-radius:12px;padding:10px 14px;cursor:pointer}
+.screen-title h2{margin:0;font-size:30px}.screen-title p{margin:5px 0 0;color:var(--muted)}
+.module-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
+.module-card{padding:22px}
+.big-number{font-size:46px;font-weight:900;letter-spacing:-2px;margin:8px 0}
+.progress-track{height:10px;background:#183148;border-radius:20px;overflow:hidden;margin:14px 0}
+.progress-fill{height:100%;border-radius:20px}
+.action-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.action-btn{border:1px solid var(--line);background:#10263c;color:white;padding:11px 14px;border-radius:12px;cursor:pointer}
+.action-btn.primary{border:0;background:linear-gradient(135deg,var(--cyan),#2189ff);color:#04111e;font-weight:900}
+.tip-list{display:grid;gap:10px;margin-top:15px}
+.tip-item{padding:14px;border-radius:14px;background:#0a1c2e;border:1px solid #17334c}
+.tip-item b{display:block;margin-bottom:4px}.tip-item span{color:var(--muted);font-size:13px;line-height:1.45}
+.mood-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:15px}
+.mood-btn{border:1px solid var(--line);background:#0a1c2e;color:white;border-radius:14px;padding:14px 8px;cursor:pointer;text-align:center}
+.mood-btn span{display:block;font-size:27px;margin-bottom:5px}.mood-btn small{color:var(--muted)}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
+.choice{border:1px solid var(--line);background:#0a1c2e;color:white;border-radius:14px;padding:15px;text-align:left;cursor:pointer}
+.choice b{display:block;margin-bottom:4px}.choice span{font-size:12px;color:var(--muted)}
+
+
+
+
+.counter-row{display:flex;align-items:center;justify-content:center;gap:22px;margin:16px 0}.counter-row.compact{justify-content:space-between;margin:10px 0}.round-counter{width:52px;height:52px;border-radius:50%;border:1px solid rgba(24,213,232,.5);background:#10263c;color:#fff;font-size:30px;line-height:1;cursor:pointer}.round-counter:hover{border-color:#18d5e8;box-shadow:0 0 20px rgba(24,213,232,.12)}.counter-value{min-width:75px;text-align:center;font-size:25px;font-weight:900}.counter-section{margin-top:18px;padding:13px 0;border-bottom:1px solid #17334c}.counter-section:last-of-type{border-bottom:0}
+
+
+/* Perfil VIVE+ */
+.profile-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.profile-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted);font-weight:800}.field input,.field select{width:100%;box-sizing:border-box;background:#081a2b;border:1px solid #23445e;border-radius:12px;color:#fff;padding:13px;font:inherit;outline:none}.field input:focus,.field select:focus{border-color:#18d5e8;box-shadow:0 0 0 3px rgba(24,213,232,.08)}.profile-avatar{width:88px;height:88px;border-radius:26px;display:grid;place-items:center;font-size:38px;background:linear-gradient(135deg,#18d5e8,#3988ff);box-shadow:0 0 35px rgba(24,213,232,.14)}.profile-head{display:flex;align-items:center;gap:16px}.profile-badge{display:inline-block;padding:7px 10px;border-radius:999px;background:#0a2538;border:1px solid #21475e;color:#18d5e8;font-size:11px;font-weight:900}.profile-note{font-size:12px;color:var(--muted);line-height:1.5;padding:12px;border-radius:12px;background:#081a2b;border:1px solid #17334c}.profile-result{display:grid;gap:10px}.profile-result .result-item{padding:14px;border-radius:14px;background:#081a2b;border:1px solid #17334c}.result-item b{display:block;margin-bottom:4px}.result-item span{font-size:12px;color:var(--muted);line-height:1.45}
+@media(max-width:760px){.profile-grid,.profile-form{grid-template-columns:1fr}.field.full{grid-column:auto}}
+
+/* VIVE+ PLUS 2.0 — capa visual: no cambia la lógica */
+body{
+  background:
+    radial-gradient(circle at 15% 0%,rgba(24,213,232,.14),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(57,136,255,.15),transparent 28%),
+    linear-gradient(135deg,#030914 0%,#061321 48%,#081a2b 100%);
+}
+.card{
+  background:linear-gradient(145deg,rgba(14,35,56,.88),rgba(5,19,33,.92));
+  border-color:rgba(60,118,157,.38);
+  box-shadow:0 14px 45px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.025);
+  backdrop-filter:blur(10px);
+}
+.logo{font-size:32px;text-shadow:0 0 22px rgba(24,213,232,.28)}
+.kicker{letter-spacing:1.5px}
+.hero-main{background:linear-gradient(135deg,rgba(14,47,69,.94),rgba(7,24,41,.96))}
+.hero-main:after{background:radial-gradient(circle,rgba(24,213,232,.25),transparent 68%)}
+.habit,.box,.module-card,.stat,.tip-item,.area-card,.analysis-item,.plan-item,.history-row{
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.habit:hover,.box.clickable-card:hover,.clickable-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(24,213,232,.62);
+  box-shadow:0 12px 35px rgba(0,0,0,.25),0 0 22px rgba(24,213,232,.07);
+}
+.btn,.action-btn.primary{
+  box-shadow:0 8px 25px rgba(24,213,232,.16);
+}
+.analysis-top-btn{
+  border:1px solid rgba(24,213,232,.55);
+  background:linear-gradient(135deg,rgba(24,213,232,.18),rgba(57,136,255,.16));
+  color:#f4f8fb;
+  border-radius:14px;
+  padding:12px 17px;
+  font-weight:900;
+  cursor:pointer;
+  white-space:nowrap;
+  box-shadow:0 8px 28px rgba(24,213,232,.09);
+  transition:.18s ease;
+}
+.analysis-top-btn:hover{transform:translateY(-2px);border-color:#18d5e8;box-shadow:0 10px 32px rgba(24,213,232,.15)}
+.screen-title h2{letter-spacing:-.7px}
+.score-circle{box-shadow:0 0 38px rgba(39,212,123,.08)}
+.mobile-nav{box-shadow:0 -8px 30px rgba(0,0,0,.18)}
+@media(max-width:760px){
+  .top{position:relative;align-items:flex-start;padding-right:8px}
+  .analysis-top-btn{padding:10px 12px;font-size:12px}
+}
+
+/* Historial y análisis diario */
+.history-list{display:grid;gap:10px;margin-top:15px}.history-row{display:grid;grid-template-columns:105px 1fr auto;gap:10px;align-items:center;padding:14px;border-radius:14px;background:#0a1c2e;border:1px solid #17334c}.history-row strong{font-size:13px}.history-row span{color:var(--muted);font-size:12px}.history-score{font-weight:900;color:var(--cyan)}.analysis-card{padding:20px}.analysis-list{display:grid;gap:10px}.analysis-item{padding:14px;border-radius:14px;background:#0a1c2e;border:1px solid #17334c}.analysis-item b{display:block;margin-bottom:5px}.analysis-item span{color:var(--muted);font-size:13px;line-height:1.45}.day-pill{border:1px solid var(--line);background:#10263c;color:#fff;padding:8px 12px;border-radius:12px;cursor:pointer}.day-pill.active{background:#18d5e8;color:#04111e;font-weight:900}.history-days{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* Índice VIVE+ */
+.vive-score{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:center}
+.score-circle{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(#27d47b 0 78%,#183148 78% 100%);position:relative}
+.score-circle:after{content:"";position:absolute;inset:12px;border-radius:50%;background:#081929}
+.score-inner{position:relative;z-index:1;text-align:center}
+.score-inner strong{display:block;font-size:48px;line-height:1}
+.score-inner span{color:var(--muted);font-size:12px}
+.score-status{padding:18px;border-radius:16px;background:#0a1c2e;border:1px solid #17334c}
+.score-status h3{margin:0 0 8px}.score-status p{color:var(--muted);line-height:1.5}
+.area-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}
+.area-card{padding:15px;border-radius:15px;background:#0a1c2e;border:1px solid #17334c}
+.area-card b{display:block;font-size:20px}.area-card span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.area-card small{display:block;margin-top:8px;color:#18d5e8;font-weight:800}
+.recommendation{padding:20px;border-radius:18px;background:linear-gradient(145deg,#102d43,#0a1c2e);border:1px solid #245170}
+.priority{font-size:20px;font-weight:900;margin:7px 0}.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.plan-item{padding:15px;border-radius:14px;background:#0a1c2e;border:1px solid #17334c}.plan-item b{display:block;margin-bottom:5px}.plan-item span{color:var(--muted);font-size:12px;line-height:1.45}
+@media(max-width:760px){.vive-score{grid-template-columns:1fr}.area-grid{grid-template-columns:repeat(2,1fr)}.plan-grid{grid-template-columns:1fr}}
+
+.toast{position:fixed;right:25px;bottom:25px;background:#102a40;border:1px solid #245170;padding:14px 18px;border-radius:13px;box-shadow:var(--shadow);display:none;z-index:100}
 .mobile-nav{display:none}
-.toast{position:fixed;right:25px;bottom:25px;background:#102a40;border:1px solid #245170;padding:14px 18px;border-radius:13px;box-shadow:var(--shadow);display:none}
-@media(max-width:1050px){.habits{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.bottom-grid{grid-template-columns:1fr 1fr}}
+
+@media(max-width:1050px){.habits{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.bottom-grid{grid-template-columns:1fr 1fr}.module-grid{grid-template-columns:1fr}}
 @media(max-width:760px){
  .app{display:block}.sidebar{display:none}main{padding:18px 14px 90px}.top{margin-bottom:18px}h1{font-size:25px}.profile{padding:6px 8px}.profile div:last-child{display:none}
  .hero h2{font-size:27px}.hero-main{padding:22px}.stats{padding:15px}
  .habits{grid-template-columns:1fr 1fr}.habit{min-height:140px;padding:14px}.bottom-grid{grid-template-columns:1fr}
  .mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;background:rgba(5,18,30,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:9px 8px;z-index:10}
  .mobile-nav button{background:none;border:0;color:#8299ad;font-size:10px}.mobile-nav button.active{color:var(--cyan)}.mobile-nav b{display:block;font-size:18px;margin-bottom:2px}
+ .screen-title h2{font-size:25px}.module-card{padding:18px}.mood-grid{grid-template-columns:repeat(3,1fr)}
 }
-@media(max-width:420px){.habits{grid-template-columns:1fr}.hero-main h2{font-size:25px}}
+@media(max-width:420px){.habits{grid-template-columns:1fr}.hero-main h2{font-size:25px}.mood-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -77,94 +188,669 @@ h1{font-size:31px;margin:4px 0 0;letter-spacing:-1px}
     <div class="logo">VIVE<span>+</span></div>
     <p class="tag">Tu bienestar, tu mejor inversión.</p>
     <nav class="nav">
-      <button class="active" onclick="selectNav(this)">🏠 <span>Inicio</span></button>
-      <button onclick="selectNav(this)">✓ <span>Hábitos</span></button>
-      <button onclick="selectNav(this)">🎯 <span>Desafíos</span></button>
-      <button onclick="selectNav(this)">👥 <span>Comunidad</span></button>
-      <button onclick="selectNav(this)">📈 <span>Progreso</span></button>
-      <button onclick="selectNav(this)">👤 <span>Perfil</span></button>
+      <button class="active" onclick="showScreen('home',this)">🏠 <span>Inicio</span></button>
+      <button onclick="toast('La sección Hábitos será nuestro siguiente módulo.')">✓ <span>Hábitos</span></button>
+      <button onclick="toast('La sección Desafíos la construiremos después.')">🎯 <span>Desafíos</span></button>
+      <button onclick="toast('La Comunidad la construiremos después.')">👥 <span>Comunidad</span></button>
+      <button onclick="toast('El Progreso se conectará con tus módulos.')">📈 <span>Progreso</span></button>
+      <button onclick="toast('El Perfil será nuestro próximo paso.')">👤 <span>Perfil</span></button>
     </nav>
     <div class="sidebar-bottom">VIVE+ · Primera versión</div>
   </aside>
 
   <main>
-    <div class="top">
-      <div><div class="kicker">Mi bienestar</div><h1>Hola, ¡vamos a vivir mejor! 👋</h1></div>
-      <div class="profile"><div class="avatar">R</div><div><b>Reinaldo</b><small>Nivel 12 · 2.450 pts</small></div></div>
-    </div>
+    <!-- INICIO -->
+    <section id="screen-home" class="screen active">
+      <div class="top">
+        <div><div class="kicker">Mi bienestar</div><h1>Hola, ¡vamos a vivir mejor! 👋</h1></div>
+        <div style="display:flex;gap:8px;align-items:center"><button class="analysis-top-btn" type="button" onclick="showScreen('profile')">👤 Perfil</button><button class="analysis-top-btn" type="button" onclick="showScreen('vive-score')">🧠 Análisis</button></div>
+        <div class="profile"><div class="avatar">R</div><div><b>Reinaldo</b><small>Nivel 12 · 2.450 pts</small></div></div>
+      </div>
 
-    <section class="hero">
-      <div class="card hero-main">
-        <div class="kicker">Tu misión de hoy</div>
-        <h2>Pequeños hábitos.<br>Grandes cambios. ✨</h2>
-        <p>Completa tus actividades, suma puntos y construye una rutina de bienestar que puedas mantener.</p>
-        <button class="btn" onclick="start()">Comenzar mi día →</button>
-      </div>
-      <div class="card stats">
-        <div class="stat"><b>2.450</b><small>⭐ Puntos</small></div>
-        <div class="stat"><b>7 🔥</b><small>Días de racha</small></div>
-        <div class="stat"><b>4/5</b><small>Metas de hoy</small></div>
-        <div class="stat"><b>75%</b><small>Progreso nivel</small></div>
-      </div>
-    </section>
-
-    <div class="section-title"><h3>Tus hábitos de hoy</h3><span>Ver todos →</span></div>
-    <section class="habits">
-      <article class="card habit"><div class="icon" style="background:#103c57">💧</div><h4>Hidratación</h4><p>6/8 vasos · 75%</p><div class="bar"><span style="width:75%;background:#28b9ff"></span></div></article>
-      <article class="card habit"><div class="icon" style="background:#103c35">🏃</div><h4>Actividad física</h4><p>45/60 min · 75%</p><div class="bar"><span style="width:75%;background:#27d47b"></span></div></article>
-      <article class="card habit"><div class="icon" style="background:#29234f">🌙</div><h4>Sueño</h4><p>7,5/8 h · 94%</p><div class="bar"><span style="width:94%;background:#9b7cff"></span></div></article>
-      <article class="card habit"><div class="icon" style="background:#4b3017">🥗</div><h4>Alimentación</h4><p>4/5 comidas · 80%</p><div class="bar"><span style="width:80%;background:#ff9b32"></span></div></article>
-      <article class="card habit"><div class="icon" style="background:#4c2035">❤️</div><h4>Bienestar emocional</h4><p>3/5 min · 60%</p><div class="bar"><span style="width:60%;background:#ff5f91"></span></div></article>
-    </section>
-
-    <div class="section-title"><h3>Tu progreso</h3><span>Esta semana ↗</span></div>
-    <section class="bottom-grid">
-      <div class="card box">
-        <h3 style="margin-top:0">🎯 Desafíos activos</h3>
-        <div class="challenge"><div><strong>Camina 10.000 pasos</strong><small>Quedan 2 días</small></div><div class="points">+250 pts</div></div>
-        <div class="challenge"><div><strong>Hidrátate 8 veces</strong><small>6 de 8 completadas</small></div><div class="points">+100 pts</div></div>
-      </div>
-      <div class="card box">
-        <h3 style="margin-top:0">👥 Comunidad</h3>
-        <p style="color:var(--muted);font-size:13px">Reto semanal · Comparte tu progreso</p>
-        <div class="people"><div class="mini">A</div><div class="mini">M</div><div class="mini">S</div><div class="mini">J</div><div class="mini">+24</div></div>
-        <button class="btn" style="margin-top:20px;padding:9px 13px" onclick="start()">Ver comunidad</button>
-      </div>
-      <div class="card box">
-        <h3 style="margin-top:0">📊 Progreso semanal</h3>
-        <div class="chart">
-          <div class="col" style="height:45%"></div><div class="col" style="height:65%"></div><div class="col" style="height:52%"></div><div class="col" style="height:78%"></div><div class="col" style="height:60%"></div><div class="col" style="height:82%"></div><div class="col" style="height:95%"></div>
+      <section class="hero">
+        <div class="card hero-main clickable-card" onclick="showScreen('habits')">
+          <div class="kicker">Tu misión de hoy</div>
+          <h2>Pequeños hábitos.<br>Grandes cambios. ✨</h2>
+          <p>Completa tus actividades, suma puntos y construye una rutina de bienestar que puedas mantener.</p>
+          <button class="btn" onclick="toast('🎉 ¡Tu día comienza ahora!')">Comenzar mi día →</button>
         </div>
-        <div class="days"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+        <div class="card stats">
+          <div class="stat"><b id="homeScore">0</b><small>🧠 Estado VIVE+</small></div>
+          <div class="stat"><b id="homeWater">0%</b><small>💧 Hidratación</small></div>
+          <div class="stat"><b id="homeSleep">0%</b><small>🌙 Sueño</small></div>
+          <div class="stat" onclick="showScreen('vive-score')" style="cursor:pointer"><b>🔎</b><small>Análisis</small></div>
+        </div>
+      </section>
+
+      <div class="section-title"><h3>Tus hábitos de hoy</h3><span>5 áreas de bienestar</span></div>
+      <section class="habits">
+        <article class="card habit" onclick="showScreen('hydration')">
+          <div class="icon" style="background:#103c57">💧</div><h4>Hidratación</h4><p>6/8 vasos · 75%</p><div class="bar"><span style="width:75%;background:#28b9ff"></span></div>
+        </article>
+        <article class="card habit" onclick="showScreen('activity')">
+          <div class="icon" style="background:#103c35">🏃</div><h4>Actividad física</h4><p>45/60 min · 75%</p><div class="bar"><span style="width:75%;background:#27d47b"></span></div>
+        </article>
+        <article class="card habit" onclick="showScreen('sleep')">
+          <div class="icon" style="background:#29234f">🌙</div><h4>Sueño</h4><p>7,5/8 h · 94%</p><div class="bar"><span style="width:94%;background:#9b7cff"></span></div>
+        </article>
+        <article class="card habit" onclick="showScreen('nutrition')">
+          <div class="icon" style="background:#4b3017">🥗</div><h4>Alimentación</h4><p>4/5 comidas · 80%</p><div class="bar"><span style="width:80%;background:#ff9b32"></span></div>
+        </article>
+        <article class="card habit" onclick="showScreen('emotional')">
+          <div class="icon" style="background:#4c2035">❤️</div><h4>Bienestar emocional</h4><p>3/5 min · 60%</p><div class="bar"><span style="width:60%;background:#ff5f91"></span></div>
+        </article>
+      </section>
+
+      <div class="section-title" style="cursor:pointer" onclick="showScreen('vive-score')"><h3>Tu progreso · VIVE+ 🧠</h3><span>Ver análisis →</span></div>
+      <section class="bottom-grid">
+        <div class="card box clickable-card" onclick="showScreen('challenges')">
+          <h3 style="margin-top:0">🎯 Desafíos activos</h3>
+          <div class="challenge"><div><strong>Camina 10.000 pasos</strong><small>Quedan 2 días</small></div><div class="points">+250 pts</div></div>
+          <div class="challenge"><div><strong>Hidrátate 8 veces</strong><small>6 de 8 completadas</small></div><div class="points">+100 pts</div></div>
+        </div>
+        <div class="card box clickable-card" onclick="showScreen('community')">
+          <h3 style="margin-top:0">👥 Comunidad</h3>
+          <p style="color:var(--muted);font-size:13px">Reto semanal · Comparte tu progreso</p>
+          <div class="people"><div class="mini">A</div><div class="mini">M</div><div class="mini">S</div><div class="mini">J</div><div class="mini">+24</div></div>
+          <button class="btn" style="margin-top:20px;padding:9px 13px" onclick="event.stopPropagation(); toast('👥 La comunidad estará disponible en la siguiente etapa.')">Ver comunidad</button>
+        </div>
+        <div class="card box clickable-card" onclick="showScreen('progress')">
+          <h3 style="margin-top:0">📊 Progreso semanal</h3>
+          <div class="chart">
+            <div class="col" style="height:45%"></div><div class="col" style="height:65%"></div><div class="col" style="height:52%"></div><div class="col" style="height:78%"></div><div class="col" style="height:60%"></div><div class="col" style="height:82%"></div><div class="col" style="height:95%"></div>
+          </div>
+          <div class="days"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- HIDRATACIÓN -->
+    <section id="screen-hydration" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Bienestar físico</div><h2>💧 Hidratación</h2><p>Comienza cada día en cero y registra lo que realmente tomas.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <div class="kicker">Agua de hoy</div>
+          <div class="big-number" id="waterCount">0 / 8</div>
+          <p style="color:var(--muted)">vasos registrados</p>
+          <div class="progress-track"><div id="waterBar" class="progress-fill" style="width:0%;background:#28b9ff"></div></div>
+          <div class="counter-row">
+            <button class="round-counter" type="button" onclick="changeWater(-1)" aria-label="Quitar un vaso">−</button>
+            <div class="counter-value" id="waterValue">0</div>
+            <button class="round-counter" type="button" onclick="changeWater(1)" aria-label="Agregar un vaso">+</button>
+          </div>
+          <div class="action-row">
+            <button class="action-btn primary" onclick="addWater()">💧 Agregar vaso</button>
+            <button class="action-btn" onclick="resetWater()">Reiniciar</button>
+          </div>
+          <div id="waterMessage" class="message" aria-live="polite"></div>
+        </div>
+        <div class="card module-card">
+          <h3>💡 Tu registro</h3>
+          <div class="tip-list">
+            <div class="tip-item"><b id="waterStatusTitle">Aún no registras agua</b><span id="waterStatusText">Usa + para comenzar a registrar tus vasos.</span></div>
+            <div class="tip-item"><b>🎯 Referencia diaria</b><span>La meta se puede personalizar posteriormente según las características y necesidades de cada usuario.</span></div>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- ACTIVIDAD -->
+    <section id="screen-activity" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Movimiento</div><h2>🏃 Actividad física</h2><p>Empieza en cero y registra caminatas y minutos de ejercicio.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <div class="kicker">Actividad de hoy</div>
+          <div class="big-number" id="activityCount">0 min</div>
+          <p style="color:var(--muted)">minutos acumulados</p>
+          <div class="progress-track"><div id="activityBar" class="progress-fill" style="width:0%;background:#27d47b"></div></div>
+          <div class="counter-section"><b>🚶 Caminata</b><div class="counter-row compact"><button class="round-counter" onclick="changeWalk(-5)">−</button><div class="counter-value"><span id="walkValue">0</span> min</div><button class="round-counter" onclick="changeWalk(5)">+</button></div></div>
+          <div class="counter-section"><b>🏋️ Ejercicio</b><div class="counter-row compact"><button class="round-counter" onclick="changeExercise(-5)">−</button><div class="counter-value"><span id="exerciseValue">0</span> min</div><button class="round-counter" onclick="changeExercise(5)">+</button></div></div>
+          <div class="action-row"><button class="action-btn primary" onclick="addActivity(10,'Actividad')">+10 min rápidos</button><button class="action-btn" onclick="resetActivity()">Reiniciar</button></div>
+          <div id="activityMessage" class="message" aria-live="polite"></div>
+        </div>
+        <div class="card module-card">
+          <h3>📋 Registro de hoy</h3>
+          <div id="activityList" class="tip-list"><div class="tip-item"><b>Sin actividades registradas</b><span>Agrega minutos usando los controles.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUEÑO -->
+    <section id="screen-sleep" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Descanso</div><h2>🌙 Sueño</h2><p>Comienza en cero y agrega tus horas y minutos de descanso.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <div class="kicker">Sueño de hoy</div>
+          <div class="big-number" id="sleepCount">0 h 00 min</div>
+          <p style="color:var(--muted)">tiempo registrado</p>
+          <div class="progress-track"><div id="sleepBar" class="progress-fill" style="width:0%;background:#9b7cff"></div></div>
+          <div class="counter-section"><b>Horas</b><div class="counter-row compact"><button class="round-counter" onclick="changeSleep( -1)">−</button><div class="counter-value"><span id="sleepHours">0</span> h</div><button class="round-counter" onclick="changeSleep( 1)">+</button></div></div>
+          <div class="counter-section"><b>Minutos</b><div class="counter-row compact"><button class="round-counter" onclick="changeSleepMinutes(-15)">−</button><div class="counter-value"><span id="sleepMinutes">0</span> min</div><button class="round-counter" onclick="changeSleepMinutes(15)">+</button></div></div>
+          <div class="action-row"><button class="action-btn" onclick="resetSleep()">Reiniciar</button></div>
+          <div id="sleepMessage" class="message" aria-live="polite"></div>
+        </div>
+        <div class="card module-card">
+          <h3>🌙 Tu descanso</h3>
+          <div class="tip-list"><div class="tip-item"><b>Registro real</b><span>El usuario introduce las horas y minutos que realmente durmió.</span></div><div class="tip-item"><b>📊 Evolución</b><span>Más adelante podremos comparar el descanso de varios días y detectar tendencias.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALIMENTACIÓN -->
+    <section id="screen-nutrition" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Alimentación</div><h2>🥗 Alimentación</h2><p>Comienza en cero y registra comidas, alimentos y valores nutricionales.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <div class="kicker">Registro del día</div>
+          <div class="big-number"><span id="mealCount">0</span> comidas</div>
+          <p style="color:var(--muted)"><span id="calorieTotal">0</span> kcal registradas</p>
+          <div class="choice-grid">
+            <button class="choice" onclick="addMeal('Desayuno',300)"><b>🌅 Desayuno</b><span>+ comida · +300 kcal</span></button>
+            <button class="choice" onclick="addMeal('Almuerzo',550)"><b>☀️ Almuerzo</b><span>+ comida · +550 kcal</span></button>
+            <button class="choice" onclick="addMeal('Colación',150)"><b>🍎 Colación</b><span>+ comida · +150 kcal</span></button>
+            <button class="choice" onclick="addMeal('Cena',450)"><b>🌙 Cena</b><span>+ comida · +450 kcal</span></button>
+          </div>
+          <div class="action-row"><button class="action-btn" onclick="resetMeals()">Reiniciar día</button></div>
+          <div id="mealMessage" class="message" aria-live="polite"></div>
+        </div>
+        <div class="card module-card">
+          <h3>🍽️ Alimentos registrados</h3>
+          <div id="mealList" class="tip-list"><div class="tip-item"><b>Aún no hay comidas</b><span>Selecciona una comida para comenzar.</span></div></div>
+          <p style="color:var(--muted);font-size:12px;line-height:1.45;margin-bottom:0">Los valores de calorías mostrados son ejemplos del prototipo. En una versión real, cada alimento tendría su propio valor nutricional y las recomendaciones evitarían usar las calorías como una meta rígida.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BIENESTAR EMOCIONAL -->
+    <section id="screen-emotional" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Bienestar emocional</div><h2>❤️ Conócete hoy</h2><p>Responde unas preguntas para que VIVE+ entienda mejor cómo estás.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <h3>1. ¿Cómo te sientes hoy?</h3>
+          <div class="mood-grid">
+            <button class="mood-btn" onclick="answerMood('Muy bien',100)"><span>😁</span><small>Muy bien</small></button>
+            <button class="mood-btn" onclick="answerMood('Bien',90)"><span>🙂</span><small>Bien</small></button>
+            <button class="mood-btn" onclick="answerMood('Regular',70)"><span>😐</span><small>Regular</small></button>
+            <button class="mood-btn" onclick="answerMood('Cansado',55)"><span>😮‍💨</span><small>Cansado</small></button>
+            <button class="mood-btn" onclick="answerMood('Estresado',45)"><span>😣</span><small>Estresado</small></button>
+          </div>
+          <h3 style="margin-top:24px">2. ¿Cómo va tu día?</h3>
+          <div class="choice-grid">
+            <button class="choice" onclick="answerDay('Va muy bien',100)"><b>🌟 Va muy bien</b><span>Me siento con energía</span></button>
+            <button class="choice" onclick="answerDay('Va bien',85)"><b>🙂 Va bien</b><span>Todo relativamente tranquilo</span></button>
+            <button class="choice" onclick="answerDay('Ha sido difícil',55)"><b>😕 Ha sido difícil</b><span>He tenido algunas dificultades</span></button>
+            <button class="choice" onclick="answerDay('Ha sido estresante',40)"><b>😣 Ha sido estresante</b><span>He sentido mucha presión</span></button>
+          </div>
+          <h3 style="margin-top:24px">3. ¿Qué necesitas hoy?</h3>
+          <div class="choice-grid">
+            <button class="choice" onclick="answerNeed('Descansar')"><b>😴 Descansar</b><span>Necesito bajar el ritmo</span></button>
+            <button class="choice" onclick="answerNeed('Moverme')"><b>🏃 Moverme</b><span>Quiero activarme</span></button>
+            <button class="choice" onclick="answerNeed('Conectar')"><b>🤝 Conectar</b><span>Quiero hablar o compartir</span></button>
+            <button class="choice" onclick="answerNeed('Un momento para mí')"><b>🧘 Un momento para mí</b><span>Necesito una pausa</span></button>
+          </div>
+          <div id="emotionalMessage" class="message" aria-live="polite"></div>
+        </div>
+        <div class="card module-card">
+          <h3>🌱 Tu resumen emocional</h3>
+          <div class="tip-list">
+            <div class="tip-item"><b>Estado</b><span id="emotionSummary">Todavía no has respondido.</span></div>
+            <div class="tip-item"><b>Cómo va tu día</b><span id="daySummary">Todavía no has respondido.</span></div>
+            <div class="tip-item"><b>Qué necesitas</b><span id="needSummary">Todavía no has respondido.</span></div>
+          </div>
+          <button class="action-btn primary" style="margin-top:15px" onclick="saveEmotionalCheck()">✓ Guardar mi check-in</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERFIL -->
+    <section id="screen-profile" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Tu identidad VIVE+</div><h2>👤 Mi perfil</h2><p>Completa tus datos para personalizar la experiencia y tus recomendaciones de bienestar.</p></div>
+      </div>
+
+      <div class="profile-grid">
+        <div class="card module-card">
+          <div class="profile-head">
+            <div class="profile-avatar">👤</div>
+            <div><div class="kicker">Perfil personal</div><h3 id="profileGreeting" style="margin:5px 0">Mi perfil VIVE+</h3><span class="profile-badge">Personalización</span></div>
+          </div>
+
+          <div class="profile-form" style="margin-top:22px">
+            <div class="field"><label>Nombre</label><input id="profileName" type="text" placeholder="Tu nombre"></div>
+            <div class="field"><label>Edad</label><input id="profileAge" type="number" min="13" max="120" placeholder="Edad"></div>
+            <div class="field"><label>Peso (kg) <span style="font-weight:500">(opcional)</span></label><input id="profileWeight" type="number" min="20" max="300" step="0.1" placeholder="Ej. 70"></div>
+            <div class="field"><label>Estatura (cm) <span style="font-weight:500">(opcional)</span></label><input id="profileHeight" type="number" min="100" max="230" placeholder="Ej. 170"></div>
+            <div class="field full"><label>Trabajo / actividad diaria</label><select id="profileWork"><option value="">Selecciona una opción</option><option>Principalmente sentado/a</option><option>De pie gran parte del día</option><option>Trabajo físicamente activo</option><option>Estudio</option><option>Otro</option></select></div>
+            <div class="field full"><label>Objetivo de bienestar</label><select id="profileGoal"><option>Sentirme con más energía</option><option>Mejorar mis hábitos</option><option>Ser más activo/a</option><option>Mejorar mi descanso</option><option>Mejorar mi alimentación</option><option>Reducir el estrés</option></select></div>
+          </div>
+
+          <div class="profile-note" style="margin-top:15px">🔒 En el prototipo estos datos se guardan solo localmente. En una versión real necesitaremos autenticación, consentimiento y protección de datos.</div>
+          <div class="action-row"><button class="action-btn primary" onclick="saveProfile()">✓ Guardar perfil</button><button class="action-btn" onclick="clearProfile()">Reiniciar</button></div>
+          <div id="profileMessage" class="message" aria-live="polite"></div>
+        </div>
+
+        <div class="card module-card">
+          <div class="kicker">Tu orientación</div>
+          <h3 id="profileStatus">Completa tu perfil</h3>
+          <div id="profileResult" class="profile-result">
+            <div class="result-item"><b>🌱 Personalización</b><span>Cuando completes el perfil, VIVE+ podrá adaptar consejos de hidratación, actividad, sueño, alimentación y bienestar emocional.</span></div>
+          </div>
+          <div class="profile-note" style="margin-top:14px">⚠️ El peso y la estatura no se usarán para etiquetarte como “bueno” o “malo”. Para una persona adulta, un profesional puede usar medidas como IMC junto con otros antecedentes; en VIVE+ esas medidas no sustituirán una evaluación de salud.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MI ESTADO VIVE+ -->
+    <section id="screen-vive-score" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Análisis personalizado</div><h2>🧠 Análisis VIVE+</h2><p>Consejos construidos a partir de tus hábitos y de tu evolución diaria.</p></div>
+      </div>
+
+      <div class="card analysis-card">
+        <div class="vive-score">
+          <div class="score-circle" id="scoreCircle">
+            <div class="score-inner"><strong id="viveScore">0</strong><span>/ 100</span></div>
+          </div>
+          <div class="score-status">
+            <div class="kicker">Análisis de hoy</div>
+            <h3 id="viveStatus">🟢 Buen día</h3>
+            <p id="viveSummary">Analizando tus registros...</p>
+            <div class="action-row">
+              <button class="action-btn primary" onclick="analyzeVive()">🔄 Actualizar análisis</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title"><h3>📊 Tus áreas hoy</h3><span>Actualizado con tus registros</span></div>
+        <div class="area-grid">
+          <div class="area-card"><b>💧 <span id="scoreWater">75%</span></b><span>Hidratación</span><small id="waterAdvice">—</small></div>
+          <div class="area-card"><b>🏃 <span id="scoreActivity">75%</span></b><span>Actividad</span><small id="activityAdvice">—</small></div>
+          <div class="area-card"><b>🌙 <span id="scoreSleep">94%</span></b><span>Sueño</span><small id="sleepAdvice">—</small></div>
+          <div class="area-card"><b>🥗 <span id="scoreMeals">80%</span></b><span>Alimentación</span><small id="mealAdvice">—</small></div>
+          <div class="area-card"><b>❤️ <span id="scoreMood">70%</span></b><span>Emocional</span><small id="moodAdvice">—</small></div>
+        </div>
+      </div>
+
+      <div class="section-title"><h3>🎯 Consejos para tu día</h3><span>Personalizados</span></div>
+      <div class="card analysis-card">
+        <div id="dailyAdvice" class="analysis-list"></div>
+      </div>
+
+      <div class="section-title"><h3>🥗 Orientación de alimentación</h3><span>Según tu día</span></div>
+      <div class="card recommendation">
+        <div class="kicker">Sugerencia VIVE+</div>
+        <div class="priority" id="foodPlanTitle">Plan equilibrado</div>
+        <p id="foodPlanText" style="color:var(--muted);line-height:1.5">La orientación se adapta a lo que has registrado hoy.</p>
+        <div class="plan-grid">
+          <div class="plan-item"><b>🍽️ Comidas</b><span id="planMeals">Mantén una alimentación variada durante el día.</span></div>
+          <div class="plan-item"><b>💧 Hidratación</b><span id="planWater">Registra tus vasos de agua.</span></div>
+          <div class="plan-item"><b>🌙 Descanso</b><span id="planSleep">Cuida tu rutina de descanso.</span></div>
+        </div>
+      </div>
+
+      <div class="section-title"><h3>📅 Historial diario</h3><span>Tu evolución</span></div>
+      <div class="card analysis-card">
+        <p style="color:var(--muted);margin-top:0">VIVE+ irá guardando un resumen de cada día para detectar cambios y patrones.</p>
+        <div id="historyDays" class="history-days"></div>
+        <div id="historyList" class="history-list"></div>
+      </div>
+
+      <div class="card module-card" style="margin-top:14px">
+        <h3>ℹ️ Importante</h3>
+        <p style="color:var(--muted);line-height:1.5;margin-bottom:0">Este análisis es orientativo y no reemplaza una evaluación profesional de salud. VIVE+ utiliza tus registros para ayudarte a reconocer hábitos y decidir qué área cuidar a continuación.</p>
+      </div>
+    </section>
+
+    <!-- HÁBITOS -->
+    <section id="screen-habits" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Tu misión de hoy</div><h2>🌱 Pequeños hábitos, grandes cambios</h2><p>Pequeñas acciones que puedes convertir en parte de tu rutina.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <div class="kicker">Consejos de hoy</div>
+          <div class="tip-list">
+            <div class="tip-item"><b>💧 Toma agua regularmente</b><span>Mantén una botella cerca y registra tus vasos durante el día.</span></div>
+            <div class="tip-item"><b>🚶 Muévete un poco más</b><span>Caminar, estirarte o practicar un deporte puede sumar a tu día.</span></div>
+            <div class="tip-item"><b>😴 Cuida tu descanso</b><span>Intenta mantener una rutina de sueño que puedas sostener.</span></div>
+            <div class="tip-item"><b>🎯 Empieza pequeño</b><span>Elige una acción sencilla y repítela con constancia.</span></div>
+          </div>
+          <div class="action-row"><button class="action-btn primary" onclick="toast('🌟 ¡Hábito completado!')">✓ Marcar como completado</button></div>
+        </div>
+        <div class="card module-card">
+          <h3>⭐ Tu progreso</h3>
+          <div class="big-number">4 / 5</div><p style="color:var(--muted)">metas de hoy</p>
+          <div class="progress-track"><div class="progress-fill" style="width:80%;background:var(--cyan)"></div></div>
+          <p style="color:var(--muted);line-height:1.5">Cada pequeño paso suma puntos y te acerca a mantener una rutina.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESAFÍOS -->
+    <section id="screen-challenges" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Gamificación</div><h2>🎯 Desafíos activos</h2><p>Retos para mantenerte motivado.</p></div>
+      </div>
+      <div class="bottom-grid">
+        <div class="card box">
+          <h3 style="margin-top:0">🏃 Camina 10.000 pasos</h3>
+          <p style="color:var(--muted)">Completa el desafío durante los próximos 2 días.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:65%;background:var(--green)"></div></div>
+          <b>6.500 / 10.000 pasos</b><div class="points" style="margin-top:12px">+250 pts</div>
+        </div>
+        <div class="card box">
+          <h3 style="margin-top:0">💧 Hidrátate 8 veces</h3>
+          <p style="color:var(--muted)">Tu progreso de hidratación de hoy.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:75%;background:#28b9ff"></div></div>
+          <b>6 / 8 vasos</b><div class="points" style="margin-top:12px">+100 pts</div>
+        </div>
+        <div class="card box">
+          <h3 style="margin-top:0">🔥 Mantén tu racha</h3>
+          <p style="color:var(--muted)">Llevas 7 días consecutivos registrando hábitos.</p>
+          <div class="big-number">7 🔥</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMUNIDAD -->
+    <section id="screen-community" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Comunidad VIVE+</div><h2>👥 Comunidad</h2><p>Comparte tus avances y participa en retos.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <h3>🏆 Reto semanal</h3>
+          <p style="color:var(--muted)">Muévete, registra tus hábitos y comparte tu progreso.</p>
+          <div class="people" style="margin:20px 0"><div class="mini">A</div><div class="mini">M</div><div class="mini">S</div><div class="mini">J</div><div class="mini">+24</div></div>
+          <button class="btn" onclick="toast('👥 ¡Te has unido al reto semanal!')">Unirme al reto →</button>
+        </div>
+        <div class="card module-card">
+          <h3>🌟 Actividad de la comunidad</h3>
+          <div class="tip-list">
+            <div class="tip-item"><b>Andrea</b><span>Completó su meta de actividad física.</span></div>
+            <div class="tip-item"><b>Matías</b><span>Mantuvo una racha de 10 días.</span></div>
+            <div class="tip-item"><b>Sofía</b><span>Completó el desafío de hidratación.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESO -->
+    <section id="screen-progress" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" onclick="showScreen('home')">← Volver</button>
+        <div class="screen-title"><div class="kicker">Tu evolución</div><h2>📊 Progreso semanal</h2><p>Observa cómo avanzan tus hábitos.</p></div>
+      </div>
+      <div class="module-grid">
+        <div class="card module-card">
+          <h3>📈 Actividad de la semana</h3>
+          <div class="chart" style="height:190px">
+            <div class="col" style="height:45%"></div><div class="col" style="height:65%"></div><div class="col" style="height:52%"></div><div class="col" style="height:78%"></div><div class="col" style="height:60%"></div><div class="col" style="height:82%"></div><div class="col" style="height:95%"></div>
+          </div>
+          <div class="days"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+        </div>
+        <div class="card module-card">
+          <h3>🏆 Tus números</h3>
+          <div class="tip-list">
+            <div class="tip-item"><b>2.450 ⭐</b><span>Puntos acumulados</span></div>
+            <div class="tip-item"><b>7 🔥</b><span>Días de racha</span></div>
+            <div class="tip-item"><b>75%</b><span>Progreso del nivel</span></div>
+            <div class="tip-item"><b>4/5</b><span>Metas completadas hoy</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
 <nav class="mobile-nav">
-  <button class="active" onclick="mobile(this)">🏠<b>Inicio</b></button>
-  <button onclick="mobile(this)">✓<b>Hábitos</b></button>
-  <button onclick="mobile(this)">🎯<b>Desafíos</b></button>
-  <button onclick="mobile(this)">👥<b>Comunidad</b></button>
-  <button onclick="mobile(this)">👤<b>Perfil</b></button>
+  <button class="active" onclick="mobileHome(this)">🏠<b>Inicio</b></button>
+  <button onclick="toast('✓ Hábitos: pronto podrás ver todas tus rutinas.')">✓<b>Hábitos</b></button>
+  <button onclick="toast('🎯 Desafíos: los construiremos en la siguiente etapa.')">🎯<b>Desafíos</b></button>
+  <button onclick="toast('👥 Comunidad: la construiremos después.')">👥<b>Comunidad</b></button>
+  <button onclick="toast('👤 Perfil: será nuestro siguiente módulo.')">👤<b>Perfil</b></button>
 </nav>
-<div id="toast" class="toast">¡Excelente! Tu día comienza ahora 💪</div>
+
+<div id="toast" class="toast"></div>
 
 <script>
-function start(){
-  const t=document.getElementById('toast');
-  t.style.display='block';
-  setTimeout(()=>t.style.display='none',2500);
+let water=0, walk=0, exercise=0, activity=0, sleep=0, sleepMinutes=0, meals=0, calorieTotal=0; let activityHistory=[]; let mealHistory=[];
+
+function showScreen(name, navButton){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const target=document.getElementById('screen-'+name);
+  if(target) target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(navButton){
+    document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+    navButton.classList.add('active');
+  }
 }
-function selectNav(btn){
-  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
-  btn.classList.add('active');
-}
-function mobile(btn){
+function mobileHome(btn){
   document.querySelectorAll('.mobile-nav button').forEach(x=>x.classList.remove('active'));
   btn.classList.add('active');
-  start();
+  showScreen('home');
 }
+function toast(message){
+  const t=document.getElementById('toast');
+  t.textContent=message;
+  t.style.display='block';
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>t.style.display='none',2500);
+}
+function renderWater(){
+  document.getElementById('waterCount').textContent=water+' / 8';
+  document.getElementById('waterValue').textContent=water;
+  document.getElementById('waterBar').style.width=Math.min(water/8*100,100)+'%';
+  document.getElementById('waterStatusTitle').textContent=water===0?'Aún no registras agua':water>=8?'🎉 Meta registrada':'💧 Registro en progreso';
+  document.getElementById('waterStatusText').textContent=water===0?'Usa + para comenzar a registrar tus vasos.':water>=8?'Has llegado a la referencia del prototipo.':'Llevas '+water+' vaso'+(water===1?'':'s')+' registrado'+(water===1?'':'s')+'.';
+}
+function changeWater(delta){water=Math.max(0,Math.min(20,water+delta));renderWater();document.getElementById('waterMessage').textContent=water?'💧 Registro actualizado.':'Registro reiniciado.';analyzeVive();}
+function addWater(){changeWater(1)}
+function resetWater(){water=0;renderWater();document.getElementById('waterMessage').textContent='Hidratación reiniciada en cero.';analyzeVive();}
+
+function renderActivity(){
+  activity=walk+exercise;
+  document.getElementById('activityCount').textContent=activity+' min';
+  document.getElementById('walkValue').textContent=walk;
+  document.getElementById('exerciseValue').textContent=exercise;
+  document.getElementById('activityBar').style.width=Math.min(activity/60*100,100)+'%';
+}
+function changeWalk(delta){walk=Math.max(0,walk+delta);renderActivity();document.getElementById('activityMessage').textContent='🚶 Caminata: '+walk+' min';analyzeVive();}
+function changeExercise(delta){exercise=Math.max(0,exercise+delta);renderActivity();document.getElementById('activityMessage').textContent='🏋️ Ejercicio: '+exercise+' min';analyzeVive();}
+function addActivity(min,type){exercise+=min;activityHistory.unshift({type,min});renderActivity();document.getElementById('activityMessage').textContent='🏃 +'+min+' minutos registrados.';renderActivityList();analyzeVive();}
+function renderActivityList(){document.getElementById('activityList').innerHTML=activityHistory.length?activityHistory.slice(0,6).map(x=>`<div class="tip-item"><b>🏃 ${x.type}</b><span>${x.min} minutos registrados.</span></div>`).join(''):'<div class="tip-item"><b>Sin actividades registradas</b><span>Agrega minutos usando los controles.</span></div>';}
+function resetActivity(){walk=0;exercise=0;activity=0;activityHistory=[];renderActivity();renderActivityList();document.getElementById('activityMessage').textContent='Actividad reiniciada en cero.';analyzeVive();}
+
+function renderSleep(){
+  const total=sleep*60+sleepMinutes;
+  const h=Math.floor(total/60), m=total%60;
+  document.getElementById('sleepCount').textContent=h+' h '+String(m).padStart(2,'0')+' min';
+  document.getElementById('sleepHours').textContent=sleep;
+  document.getElementById('sleepMinutes').textContent=sleepMinutes;
+  document.getElementById('sleepBar').style.width=Math.min(total/(8*60)*100,100)+'%';
+}
+function changeSleep(delta){sleep=Math.max(0,Math.min(24,sleep+delta));renderSleep();document.getElementById('sleepMessage').textContent='🌙 Horas actualizadas.';analyzeVive();}
+function changeSleepMinutes(delta){let total=Math.max(0,Math.min(24*60,sleep*60+sleepMinutes+delta));sleep=Math.floor(total/60);sleepMinutes=total%60;renderSleep();document.getElementById('sleepMessage').textContent='🌙 Minutos actualizados.';analyzeVive();}
+function resetSleep(){sleep=0;sleepMinutes=0;renderSleep();document.getElementById('sleepMessage').textContent='Sueño reiniciado en cero.';analyzeVive();}
+
+function addMeal(type,kcal){
+  meals++;
+  calorieTotal+=kcal;
+  mealHistory.unshift({type,kcal});
+  document.getElementById('mealCount').textContent=meals;
+  document.getElementById('calorieTotal').textContent=calorieTotal;
+  document.getElementById('mealMessage').textContent='🥗 '+type+' registrado.';
+  document.getElementById('mealList').innerHTML=mealHistory.slice(0,8).map(x=>`<div class="tip-item"><b>${x.type}</b><span>Registro de ejemplo · ${x.kcal} kcal</span></div>`).join('');
+  analyzeVive();
+}
+function resetMeals(){meals=0;calorieTotal=0;mealHistory=[];document.getElementById('mealCount').textContent='0';document.getElementById('calorieTotal').textContent='0';document.getElementById('mealList').innerHTML='<div class="tip-item"><b>Aún no hay comidas</b><span>Selecciona una comida para comenzar.</span></div>';document.getElementById('mealMessage').textContent='Alimentación reiniciada en cero.';analyzeVive();}
+
+let moodScore=70, dayScore=70;
+function answerMood(mood,score){moodScore=score;document.getElementById('emotionSummary').textContent=mood;document.getElementById('emotionalMessage').textContent='❤️ Estado emocional registrado: '+mood;analyzeVive();}
+function answerDay(day,score){dayScore=score;document.getElementById('daySummary').textContent=day;document.getElementById('emotionalMessage').textContent='🌤️ Registro del día actualizado.';analyzeVive();}
+function answerNeed(need){document.getElementById('needSummary').textContent=need;document.getElementById('emotionalMessage').textContent='🌱 Necesidad registrada: '+need;analyzeVive();}
+function saveEmotionalCheck(){toast('❤️ Check-in emocional guardado.');analyzeVive();}
+function chooseMood(mood){const scores={ 'Muy bien':100,'Bien':90,'Regular':70,'Cansado':55,'Estresado':45};answerMood(mood,scores[mood]||70);}
+function addEmotionalActivity(){document.getElementById('emotionalMessage').textContent='🧘 ¡Excelente! Registraste un momento de bienestar.';toast('❤️ Pausa de bienestar completada.');analyzeVive();}
+
+const viveHistory=[
+  {day:'Hoy',score:78,water:75,activity:75,sleep:94,meals:80,mood:70,advice:'Priorizar hidratación y descanso.'},
+  {day:'Ayer',score:82,water:88,activity:80,sleep:86,meals:80,mood:78,advice:'Buen equilibrio general.'},
+  {day:'Mié',score:74,water:63,activity:92,sleep:70,meals:78,mood:65,advice:'Más agua y descanso.'},
+  {day:'Mar',score:80,water:82,activity:76,sleep:88,meals:75,mood:79,advice:'Mantener hábitos constantes.'},
+  {day:'Lun',score:76,water:70,activity:72,sleep:82,meals:80,mood:70,advice:'Pequeños ajustes en hidratación.'}
+];
+let selectedHistoryDay=0;
+
+
+let profile={name:'',age:'',weight:'',height:'',work:'',goal:''};
+function saveProfile(){
+  profile={
+    name:document.getElementById('profileName').value.trim(),
+    age:document.getElementById('profileAge').value,
+    weight:document.getElementById('profileWeight').value,
+    height:document.getElementById('profileHeight').value,
+    work:document.getElementById('profileWork').value,
+    goal:document.getElementById('profileGoal').value
+  };
+  document.getElementById('profileGreeting').textContent=profile.name?`Hola, ${profile.name}`:'Mi perfil VIVE+';
+  document.getElementById('profileStatus').textContent=profile.name?'Perfil personalizado':'Perfil guardado';
+  document.getElementById('profileResult').innerHTML=`
+    <div class="result-item"><b>🎯 Objetivo</b><span>${profile.goal}</span></div>
+    <div class="result-item"><b>🧭 Rutina diaria</b><span>${profile.work||'Aún no indicada'}. VIVE+ usará este dato para adaptar sugerencias de movimiento y descanso.</span></div>
+    <div class="result-item"><b>💧 Hidratación</b><span>La recomendación se ajustará a tus registros diarios y, cuando corresponda, a tus características personales.</span></div>
+    <div class="result-item"><b>🏃 Actividad</b><span>El plan priorizará progresión gradual y actividades que puedas realizar de forma segura.</span></div>
+    <div class="result-item"><b>🥗 Alimentación</b><span>Se generarán ideas de alimentación variada y equilibrada, no dietas restrictivas.</span></div>
+  `;
+  document.getElementById('profileMessage').textContent='✓ Perfil guardado en este prototipo.';
+  toast('👤 Perfil actualizado');
+}
+function clearProfile(){
+  profile={name:'',age:'',weight:'',height:'',work:'',goal:''};
+  ['profileName','profileAge','profileWeight','profileHeight'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('profileWork').value='';
+  document.getElementById('profileGoal').value='Sentirme con más energía';
+  document.getElementById('profileGreeting').textContent='Mi perfil VIVE+';
+  document.getElementById('profileStatus').textContent='Completa tu perfil';
+  document.getElementById('profileResult').innerHTML='<div class="result-item"><b>🌱 Personalización</b><span>Cuando completes el perfil, VIVE+ podrá adaptar consejos de hidratación, actividad, sueño, alimentación y bienestar emocional.</span></div>';
+  document.getElementById('profileMessage').textContent='Perfil reiniciado.';
+}
+
+function currentScores(){
+  const waterScore=Math.round(Math.min(water/8,1)*100);
+  const activityScore=Math.round(Math.min(activity/60,1)*100);
+  const sleepTotal=sleep*60+sleepMinutes;
+  const sleepScore=Math.round(Math.min(sleepTotal/(8*60),1)*100);
+  const mealScore=Math.round(Math.min(meals/5,1)*100);
+  const emotionalScore=Math.round((moodScore*.7)+(dayScore*.3));
+  const score=Math.round(waterScore*.20+activityScore*.20+sleepScore*.25+mealScore*.20+emotionalScore*.15);
+  return {score,water:waterScore,activity:activityScore,sleep:sleepScore,meals:mealScore,mood:emotionalScore};
+}
+
+function analyzeVive(){
+  const s=currentScores();
+  document.getElementById('viveScore').textContent=s.score;
+  document.getElementById('homeScore').textContent=s.score;
+  document.getElementById('homeWater').textContent=s.water+'%';
+  document.getElementById('homeSleep').textContent=s.sleep+'%';
+  document.getElementById('scoreWater').textContent=s.water+'%';
+  document.getElementById('scoreActivity').textContent=s.activity+'%';
+  document.getElementById('scoreSleep').textContent=s.sleep+'%';
+  document.getElementById('scoreMeals').textContent=s.meals+'%';
+  document.getElementById('scoreMood').textContent=s.mood+'%';
+
+  const priorities=[];
+  if(s.water<75) priorities.push('💧 hidratación');
+  if(s.sleep<80) priorities.push('🌙 descanso');
+  if(s.activity<75) priorities.push('🏃 movimiento');
+  if(s.meals<75) priorities.push('🥗 alimentación');
+  if(s.mood<70) priorities.push('❤️ bienestar emocional');
+
+  document.getElementById('waterAdvice').textContent=s.water<75?'Prioridad':'Bien';
+  document.getElementById('activityAdvice').textContent=s.activity<75?'Prioridad':'Bien';
+  document.getElementById('sleepAdvice').textContent=s.sleep<80?'Prioridad':'Bien';
+  document.getElementById('mealAdvice').textContent=s.meals<75?'Prioridad':'Bien';
+  document.getElementById('moodAdvice').textContent=s.mood<70?'Prioridad':'Bien';
+
+  let status='🟢 Buen equilibrio';
+  if(s.score<55) status='🟠 Necesitas cuidarte más hoy';
+  else if(s.score<75) status='🟡 Hay áreas para mejorar';
+  document.getElementById('viveStatus').textContent=status;
+
+  document.getElementById('viveSummary').textContent=priorities.length
+    ? 'Según tus registros de hoy, VIVE+ recomienda poner atención primero en '+priorities.slice(0,2).join(' y ')+'.'
+    : 'Tus registros muestran un buen equilibrio general. Mantén tus hábitos y escucha las necesidades de tu cuerpo.';
+
+  const advice=[];
+  if(s.water<75) advice.push(['💧 Hidratación','Has registrado poca agua respecto de tu meta. Intenta repartir tus vasos durante el día en lugar de esperar al final.']);
+  else advice.push(['💧 Hidratación','Tu hidratación va bien. Continúa registrando tus vasos durante el día.']);
+  if(s.sleep<80) advice.push(['🌙 Sueño','Hoy registraste menos descanso del objetivo. Prioriza una rutina tranquila y un horario de sueño consistente.']);
+  else advice.push(['🌙 Sueño','Tu registro de sueño está cerca de tu objetivo. Mantén una rutina de descanso constante.']);
+  if(s.activity<75) advice.push(['🏃 Actividad física','Te falta movimiento para acercarte a tu objetivo de hoy. Puedes sumar una caminata o actividad que disfrutes.']);
+  else advice.push(['🏃 Actividad física','Tu actividad está bien encaminada. Mantén el movimiento que sea apropiado para ti.']);
+  if(s.meals<75) advice.push(['🥗 Alimentación','Has registrado pocas comidas. Procura mantener una alimentación variada y suficiente durante el día.']);
+  else advice.push(['🥗 Alimentación','Tu registro de comidas va bien. Busca variedad y equilibrio, sin convertir las calorías en una meta rígida.']);
+  if(s.mood<70) advice.push(['❤️ Bienestar emocional','Tu registro emocional sugiere que hoy podrías necesitar una pausa, descanso o conexión con alguien de confianza.']);
+  else advice.push(['❤️ Bienestar emocional','Tu registro emocional está bien. Continúa reservando pequeños momentos para ti.']);
+  document.getElementById('dailyAdvice').innerHTML=advice.map(a=>`<div class="analysis-item"><b>${a[0]}</b><span>${a[1]}</span></div>`).join('');
+
+  let foodTitle='🥗 Mantén un plan equilibrado';
+  let foodText='VIVE+ sugiere una alimentación variada y suficiente, adaptada a lo que has registrado hoy.';
+  if(s.water<75) {foodTitle='💧 Alimentación + hidratación';foodText='Como tu hidratación está baja, prioriza comidas variadas y acompáñalas con agua durante el día.';}
+  else if(s.sleep<80) {foodTitle='🌙 Alimentación + descanso';foodText='Como tu descanso está bajo, prioriza comidas regulares y una rutina tranquila hacia el final del día.';}
+  else if(s.activity>=90) {foodTitle='🏃 Alimentación + recuperación';foodText='Tu actividad fue alta. Procura una alimentación variada que acompañe tu recuperación y tu hidratación.';}
+  document.getElementById('foodPlanTitle').textContent=foodTitle;
+  document.getElementById('foodPlanText').textContent=foodText;
+  document.getElementById('planMeals').textContent=s.meals<75?'Registra tus comidas y procura variedad a lo largo del día.':'Mantén variedad de alimentos y horarios de comida que te funcionen.';
+  document.getElementById('planWater').textContent=s.water<75?'Acompaña tu día con agua y registra cada vaso.':'Continúa con tu buena hidratación.';
+  document.getElementById('planSleep').textContent=s.sleep<80?'Da prioridad a tu descanso esta noche.':'Mantén tu rutina de sueño.';
+
+  document.getElementById('scoreCircle').style.background=`conic-gradient(#27d47b 0 ${s.score}%,#183148 ${s.score}% 100%)`;
+  updateHistory(s);
+}
+
+function updateHistory(s){
+  viveHistory[0]={day:'Hoy',score:s.score,water:s.water,activity:s.activity,sleep:s.sleep,meals:s.meals,mood:s.mood,advice:'Análisis actualizado según tus registros de hoy.'};
+  renderHistory();
+}
+
+function renderHistory(){
+  const days=document.getElementById('historyDays');
+  const list=document.getElementById('historyList');
+  if(!days||!list) return;
+  days.innerHTML=viveHistory.map((x,i)=>`<button type="button" class="day-pill ${i===selectedHistoryDay?'active':''}" onclick="selectHistory(${i})">${x.day}</button>`).join('');
+  const x=viveHistory[selectedHistoryDay];
+  list.innerHTML=`
+    <div class="history-row"><strong>🧠 Estado VIVE+</strong><span>${x.advice}</span><div class="history-score">${x.score}/100</div></div>
+    <div class="history-row"><strong>💧 Hidratación</strong><span>${x.water}% de referencia</span><div class="history-score">${x.water}%</div></div>
+    <div class="history-row"><strong>🏃 Actividad</strong><span>${x.activity}% de referencia</span><div class="history-score">${x.activity}%</div></div>
+    <div class="history-row"><strong>🌙 Sueño</strong><span>${x.sleep}% de referencia</span><div class="history-score">${x.sleep}%</div></div>
+    <div class="history-row"><strong>🥗 Alimentación</strong><span>${x.meals}% de referencia</span><div class="history-score">${x.meals}%</div></div>
+    <div class="history-row"><strong>❤️ Emocional</strong><span>${x.mood}% orientativo</span><div class="history-score">${x.mood}%</div></div>`;
+}
+function selectHistory(i){selectedHistoryDay=i;renderHistory();}
 </script>
 </body>
 </html>
