@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="theme-color" content="#16b978">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="VIVE+">
+<link rel="manifest" href="manifest.json">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071526">
@@ -851,6 +858,16 @@ function renderHistory(){
     <div class="history-row"><strong>❤️ Emocional</strong><span>${x.mood}% orientativo</span><div class="history-score">${x.mood}%</div></div>`;
 }
 function selectHistory(i){selectedHistoryDay=i;renderHistory();}
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(() => console.log('VIVE+ listo para uso como PWA'))
+      .catch(err => console.warn('No se pudo activar el modo offline:', err));
+  });
+}
 </script>
 </body>
 </html>
