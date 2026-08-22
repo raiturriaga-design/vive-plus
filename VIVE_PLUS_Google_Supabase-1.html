@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#071526">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="VIVE+">
+<link rel="manifest" href="manifest.json">
+<title>VIVE+ | Bienestar integral</title>
+<style>
+:root{--bg:#eefbf8;--surface:#fff;--surface2:#f5fffd;--text:#12302f;--muted:#6c8585;--line:#dcefeb;--green:#16b978;--cyan:#16cfe0;--blue:#2389e9;--navy:#123f50;--shadow:0 14px 40px rgba(22,91,91,.09);--radius:24px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(circle at 8% 0%,rgba(66,217,154,.18),transparent 23%),radial-gradient(circle at 94% 3%,rgba(22,207,224,.16),transparent 25%),linear-gradient(145deg,#eafaff,#f2fcff 45%,#e9fbf5)}
+button,input,select{font:inherit}button{transition:.18s ease;cursor:pointer}.app{display:grid;grid-template-columns:238px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:26px 15px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-right:1px solid var(--line);z-index:20}.logo{font-size:34px;font-weight:950;letter-spacing:-2px;margin:0 12px;background:linear-gradient(100deg,var(--green),var(--cyan),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}.logo span{color:var(--green)}.tag{font-size:11px;color:var(--muted);margin:3px 12px 30px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#708686;text-align:left;padding:12px 14px;border-radius:15px;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{color:#0d6f5b;background:linear-gradient(100deg,#e2fbf0,#e2faff);box-shadow:inset 3px 0 var(--green)}.nav button.active{font-weight:900}.sidebar-bottom{position:absolute;bottom:20px;left:15px;right:15px;text-align:center;color:#9ab0ae;font-size:10px}
+main{max-width:1450px;width:100%;margin:auto;padding:26px 38px 110px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.kicker{color:#0ca87a;font-size:11px;font-weight:950;letter-spacing:1.35px;text-transform:uppercase}h1{font-size:31px;letter-spacing:-1.4px;margin:5px 0 0}.card{background:rgba(255,255,255,.93);border:1px solid rgba(190,231,235,.8);border-radius:var(--radius);box-shadow:var(--shadow)}.profile{display:flex;align-items:center;gap:9px;padding:6px 9px;border:1px solid var(--line);border-radius:17px;background:#fff}.avatar{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#42d99a,var(--cyan));color:#073b39;font-weight:950}.profile small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.analysis-top-btn{border:1px solid #cdece5;background:#f8fffd;color:#176257;border-radius:13px;padding:9px 12px;font-weight:850}
+.hero{display:grid;grid-template-columns:1.42fr .78fr;gap:15px;margin-bottom:20px}.hero-main{padding:30px;min-height:250px;position:relative;overflow:hidden;color:#fff;border:0;background:radial-gradient(circle at 82% 16%,rgba(66,217,154,.42),transparent 24%),linear-gradient(130deg,#0d6d59,#0b8e72 38%,#109eb4 72%,#167ec2)}.hero h2{position:relative;z-index:1;font-size:37px;line-height:1.03;letter-spacing:-1.8px;margin:8px 0 11px}.hero p{position:relative;z-index:1;color:#d9fbf4;max-width:620px;line-height:1.55;margin:0 0 22px}.btn{border:0;border-radius:14px;padding:12px 18px;background:#fff;color:#087a63;font-weight:950;box-shadow:0 8px 25px rgba(0,0,0,.1)}.btn:hover,.action-btn:hover,.back-btn:hover{transform:translateY(-2px)}.stats{padding:13px;display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{padding:15px;border-radius:18px;background:linear-gradient(145deg,#fbfffe,#f3fbfa);border:1px solid var(--line);min-height:92px}.stat b{font-size:27px}.stat small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.section-title{display:flex;align-items:end;justify-content:space-between;margin:28px 2px 11px}.section-title h3{margin:0;font-size:18px}.section-title span{font-size:10px;color:#0ca87a;font-weight:900}.habits{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.habit{padding:16px;min-height:151px;cursor:pointer;position:relative}.habit:hover,.clickable-card:hover{transform:translateY(-4px);border-color:#bde8dd}.icon{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;font-size:20px;margin-bottom:14px}.habit h4{margin:0 0 5px;font-size:13px}.habit p{margin:0;color:var(--muted);font-size:10px}.bar,.progress-track{height:7px;background:#e6f1ef;border-radius:20px;margin-top:14px;overflow:hidden}.bar span,.progress-fill{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green),var(--cyan),#48bdf5)}.bottom-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:11px}.box,.module-card,.analysis-card{padding:19px}.challenge{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.challenge:last-child{border-bottom:0}.challenge strong{font-size:12px}.challenge small{display:block;color:var(--muted);margin-top:4px;font-size:10px}.points{color:#0ca87a;font-weight:950;white-space:nowrap}.people{display:flex;align-items:center}.mini{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#e4f8f3;border:2px solid #fff;margin-left:-7px;font-size:10px;color:#47716b}.people .mini:first-child{margin-left:0}.chart{height:130px;display:flex;align-items:end;gap:8px;padding-top:20px}.col{flex:1;background:linear-gradient(to top,var(--green),var(--cyan),var(--blue));border-radius:8px 8px 2px 2px;min-height:20px}.days{display:flex;gap:8px;color:#9ab0ae;font-size:9px}.days span{flex:1;text-align:center}
+.screen{display:none;animation:fadeIn .2s ease}.screen.active{display:block}@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}.screen-header{display:flex;align-items:center;gap:12px;margin-bottom:19px}.back-btn{border:1px solid #c9eee7;background:linear-gradient(135deg,#f0fff9,#eafcff);color:#176257;border-radius:12px;padding:9px 12px;font-weight:800}.screen-title h2{margin:0;font-size:29px}.screen-title p{margin:4px 0 0;color:var(--muted);font-size:12px}.module-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.big-number{font-size:45px;font-weight:950;letter-spacing:-2px;margin:8px 0}.action-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}.action-btn{border:0;background:linear-gradient(135deg,var(--green),var(--cyan));color:#063b36;padding:10px 14px;border-radius:12px;font-weight:900;box-shadow:0 7px 18px rgba(22,185,120,.12)}.tip-list{display:grid;gap:8px;margin-top:14px}.tip-item,.result-item,.analysis-item{padding:13px;border-radius:14px;background:linear-gradient(145deg,#fbfffe,#f4fbfa);border:1px solid var(--line)}.tip-item b,.analysis-item b{display:block;margin-bottom:4px;font-size:12px}.tip-item span,.analysis-item span,.result-item span{color:var(--muted);font-size:11px;line-height:1.45}.counter-row{display:flex;align-items:center;justify-content:center;gap:22px;margin:16px 0}.counter-row.compact{justify-content:space-between;margin:10px 0}.round-counter{width:49px;height:49px;border-radius:50%;border:1px solid #bce7de;background:linear-gradient(145deg,#effff9,#e6fbff);color:#07816e;font-size:28px}.counter-value{min-width:75px;text-align:center;font-size:23px;font-weight:950}.counter-section{margin-top:17px;padding:13px 0;border-bottom:1px solid var(--line)}.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}.choice,.mood-btn{border:1px solid var(--line);background:#fff;color:#274647;border-radius:14px;padding:13px;text-align:left}.choice:hover,.mood-btn:hover{border-color:#9fe2d1;background:#f1fffa;transform:translateY(-2px)}.choice b{display:block;margin-bottom:4px;font-size:12px}.choice span,.mood-btn small{font-size:10px;color:var(--muted)}.mood-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.mood-btn{text-align:center}.mood-btn span{display:block;font-size:26px;margin-bottom:4px}.profile-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.profile-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:10px;color:var(--muted);font-weight:850}.field input,.field select{width:100%;background:#f8fffd;border:1px solid var(--line);border-radius:12px;color:#274647;padding:12px;outline:none}.profile-head{display:flex;align-items:center;gap:14px}.profile-avatar{width:86px;height:86px;border-radius:24px;display:grid;place-items:center;font-size:36px;background:linear-gradient(135deg,#dff9ef,#dff8ff);color:#07816e}.profile-badge{display:inline-block;padding:6px 9px;border-radius:999px;background:#e6fbf5;color:#0c9b76;font-size:9px;font-weight:900}.profile-result{display:grid;gap:8px}.profile-note{font-size:10px;color:var(--muted);line-height:1.5;padding:11px;border-radius:12px;background:#f7fffd;border:1px solid var(--line)}.vive-score{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center}.score-circle{width:180px;height:180px;border-radius:50%;display:grid;place-items:center;margin:auto;background:conic-gradient(var(--green) 0 0%,#e4efed 0 100%);position:relative}.score-circle:after{content:"";position:absolute;inset:12px;border-radius:50%;background:#fff}.score-inner{position:relative;z-index:1;text-align:center}.score-inner strong{display:block;font-size:47px}.score-inner span{color:var(--muted);font-size:10px}.score-status{padding:17px;border-radius:16px;background:linear-gradient(145deg,#f3fffb,#f2fbff);border:1px solid var(--line)}.area-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:15px}.area-card{padding:13px;border-radius:14px;background:#f7fffd;border:1px solid var(--line)}.area-card b{display:block;font-size:18px}.area-card span{display:block;color:var(--muted);font-size:10px;margin-top:3px}.area-card small{display:block;margin-top:7px;color:#0ca87a;font-weight:850;font-size:9px}.recommendation{padding:19px;border-radius:18px;background:linear-gradient(135deg,#eafff6,#eafaff);border:1px solid #ccefe5}.priority{font-size:18px;font-weight:950;margin:6px 0}.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}.plan-item{padding:13px;border-radius:13px;background:#fff;border:1px solid var(--line)}.history-days{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}.day-pill{border:1px solid var(--line);background:#fff;color:#526b6b;padding:7px 10px;border-radius:10px;font-size:10px}.day-pill.active{background:linear-gradient(135deg,var(--green),var(--cyan));color:#063b36;font-weight:950}.history-list{display:grid;gap:8px;margin-top:14px}.history-row{display:grid;grid-template-columns:105px 1fr auto;gap:9px;align-items:center;padding:12px;border-radius:13px;background:#f7fffd;border:1px solid var(--line)}.history-row strong{font-size:11px}.history-row span{color:var(--muted);font-size:10px}.history-score{font-weight:950;color:#0ca87a}.toast{position:fixed;right:20px;bottom:20px;background:#0c695b;color:#fff;padding:12px 16px;border-radius:13px;display:none;z-index:100;font-size:12px}.mobile-nav{display:none}
+.auth-screen{position:fixed;inset:0;background:linear-gradient(145deg,#eafaff,#e9fbf5);display:flex;align-items:center;justify-content:center;padding:20px;z-index:200}.auth-box{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 25px 80px rgba(18,63,80,.15)}.auth-logo{text-align:center;font-size:45px;font-weight:950;letter-spacing:-3px;background:linear-gradient(100deg,var(--green),var(--cyan),var(--blue));-webkit-background-clip:text;color:transparent}.auth-box h2{margin:8px 0;text-align:center}.auth-box p{color:var(--muted);font-size:12px;line-height:1.5;text-align:center}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#f2faf8;padding:5px;border-radius:13px;margin:20px 0}.auth-tabs button{border:0;background:transparent;padding:10px;border-radius:10px;color:var(--muted);font-weight:800}.auth-tabs button.active{background:#fff;color:#0c806b;box-shadow:0 3px 12px rgba(0,0,0,.05)}.auth-form{display:grid;gap:10px}.auth-form input{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#f8fffd;outline:none}.auth-submit{border:0;border-radius:13px;padding:13px;background:linear-gradient(135deg,var(--green),var(--cyan));color:#063b36;font-weight:950;margin-top:5px}.auth-message{font-size:11px;text-align:center;margin-top:10px;min-height:16px;color:#0c806b}.logout-btn{border:1px solid #cdece5;background:#f8fffd;color:#176257;border-radius:12px;padding:8px 10px;font-size:10px;font-weight:850}
+@media(max-width:1100px){.habits{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.bottom-grid{grid-template-columns:1fr 1fr}.module-grid{grid-template-columns:1fr}.area-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.app{display:block}.sidebar{display:none}main{padding:15px 12px 92px}.top{align-items:flex-start;margin-bottom:15px}h1{font-size:24px}.top .profile div:last-child{display:none}.hero h2{font-size:28px}.hero-main{padding:22px;min-height:225px}.habits{grid-template-columns:1fr 1fr}.habit{min-height:138px;padding:13px}.bottom-grid{grid-template-columns:1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 6px;z-index:50}.mobile-nav button{background:none;border:0;color:#89a09e;font-size:9px;padding:2px 0}.mobile-nav b{display:block;font-size:17px;margin-bottom:2px}.screen-title h2{font-size:23px}.mood-grid{grid-template-columns:repeat(3,1fr)}.vive-score{grid-template-columns:1fr}.area-grid{grid-template-columns:repeat(2,1fr)}.plan-grid{grid-template-columns:1fr}.profile-grid,.profile-form{grid-template-columns:1fr}.field.full{grid-column:auto}.history-row{grid-template-columns:1fr auto}.history-row span{grid-column:1/-1;grid-row:2}}
+@media(max-width:420px){.habits{grid-template-columns:1fr}.mood-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!--
+  VIVE+ CON SUPABASE
+  1) Reemplaza SOLO TU_PUBLISHABLE_KEY con la Publishable key de Supabase.
+  2) NO pongas aquí una secret key ni service_role.
+  3) Google se activa en Supabase > Authentication > Sign In / Providers > Google.
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<div id="authScreen" class="auth-screen">
+  <div class="auth-box">
+    <div class="auth-logo">VIVE+</div>
+    <h2 id="authTitle">Crear mi cuenta</h2>
+    <p id="authSubtitle">Comienza tu experiencia de bienestar y guarda tus avances.</p>
+    <div class="auth-tabs">
+      <button id="tabRegister" class="active" onclick="setAuthMode('register')">Crear cuenta</button>
+      <button id="tabLogin" onclick="setAuthMode('login')">Iniciar sesión</button>
+    </div>
+    <form class="auth-form" onsubmit="handleAuth(event)">
+      <input id="authName" type="text" placeholder="Tu nombre" autocomplete="name">
+      <input id="authEmail" type="email" placeholder="Correo electrónico" autocomplete="email" required>
+      <input id="authPassword" type="password" placeholder="Contraseña" minlength="6" autocomplete="new-password" required>
+      <button id="authSubmit" class="auth-submit" type="submit">Crear mi cuenta</button>
+    </form>
+    <div style="display:flex;align-items:center;gap:8px;margin:15px 0;color:#9ab0ae;font-size:10px">
+      <span style="height:1px;background:#dcefeb;flex:1"></span><span>O</span><span style="height:1px;background:#dcefeb;flex:1"></span>
+    </div>
+    <button type="button" class="auth-submit" style="background:#fff;color:#274647;border:1px solid #dcefeb" onclick="signInWithGoogle()">🌐 Continuar con Google</button>
+    <div id="authMessage" class="auth-message"></div>
+  </div>
+</div>
+
+<div id="appRoot" class="app" style="display:none">
+<aside class="sidebar">
+  <div class="logo">VIVE<span>+</span></div>
+  <p class="tag">Tu bienestar, tu mejor inversión.</p>
+  <nav class="nav">
+    <button class="active" onclick="showScreen('home',this)">🏠 <span>Inicio</span></button>
+    <button onclick="showScreen('habits',this)">✓ <span>Hábitos</span></button>
+    <button onclick="showScreen('challenges',this)">🎯 <span>Desafíos</span></button>
+    <button onclick="showScreen('community',this)">👥 <span>Comunidad</span></button>
+    <button onclick="showScreen('progress',this)">📈 <span>Progreso</span></button>
+    <button onclick="showScreen('profile',this)">👤 <span>Perfil</span></button>
+  </nav>
+  <div class="sidebar-bottom">VIVE+ · Supabase</div>
+</aside>
+
+<main>
+<section id="screen-home" class="screen active">
+  <div class="top">
+    <div><div class="kicker">Mi bienestar</div><h1>Hola, <span id="homeName">vamos a vivir mejor</span> 👋</h1></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button class="analysis-top-btn" onclick="showScreen('profile')">👤 Perfil</button>
+      <button class="analysis-top-btn" onclick="showScreen('vive-score')">🧠 Análisis</button>
+      <button class="logout-btn" onclick="logout()">Salir</button>
+    </div>
+    <div class="profile"><div class="avatar" id="topAvatar">V</div><div><b id="topName">VIVE+</b><small>Cuenta conectada</small></div></div>
+  </div>
+
+  <section class="hero">
+    <div class="card hero-main">
+      <div class="kicker" style="color:#b9ffe9">Tu misión de hoy</div>
+      <h2>Pequeños hábitos.<br>Grandes cambios. ✨</h2>
+      <p>Completa tus actividades, suma avances y construye una rutina de bienestar que puedas mantener.</p>
+      <button class="btn" onclick="showScreen('habits')">Comenzar mi día →</button>
+    </div>
+    <div class="card stats">
+      <div class="stat"><b id="homeScore">0</b><small>🧠 Estado VIVE+</small></div>
+      <div class="stat"><b id="homeWater">0%</b><small>💧 Hidratación</small></div>
+      <div class="stat"><b id="homeSleep">0%</b><small>🌙 Sueño</small></div>
+      <div class="stat" onclick="showScreen('vive-score')" style="cursor:pointer"><b>🔎</b><small>Análisis</small></div>
+    </div>
+  </section>
+
+  <div class="section-title"><h3>Tus hábitos de hoy</h3><span>5 áreas de bienestar</span></div>
+  <section class="habits">
+    <article class="card habit" onclick="showScreen('hydration')"><div class="icon" style="background:#103c57">💧</div><h4>Hidratación</h4><p id="homeWaterText">0/8 vasos</p><div class="bar"><span id="homeWaterBar" style="width:0%;background:#28b9ff"></span></div></article>
+    <article class="card habit" onclick="showScreen('activity')"><div class="icon" style="background:#103c35">🏃</div><h4>Actividad física</h4><p id="homeActivityText">0/60 min</p><div class="bar"><span id="homeActivityBar" style="width:0%;background:#27d47b"></span></div></article>
+    <article class="card habit" onclick="showScreen('sleep')"><div class="icon" style="background:#29234f">🌙</div><h4>Sueño</h4><p id="homeSleepText">0/8 h</p><div class="bar"><span id="homeSleepBar" style="width:0%;background:#9b7cff"></span></div></article>
+    <article class="card habit" onclick="showScreen('nutrition')"><div class="icon" style="background:#4b3017">🥗</div><h4>Alimentación</h4><p id="homeMealsText">0/5 comidas</p><div class="bar"><span id="homeMealsBar" style="width:0%;background:#ff9b32"></span></div></article>
+    <article class="card habit" onclick="showScreen('emotional')"><div class="icon" style="background:#4c2035">❤️</div><h4>Bienestar emocional</h4><p id="homeMoodText">70% orientativo</p><div class="bar"><span id="homeMoodBar" style="width:70%;background:#ff5f91"></span></div></article>
+  </section>
+
+  <div class="section-title" onclick="showScreen('vive-score')" style="cursor:pointer"><h3>Tu progreso · VIVE+ 🧠</h3><span>Ver análisis →</span></div>
+  <section class="bottom-grid">
+    <div class="card box" onclick="showScreen('challenges')" style="cursor:pointer"><h3 style="margin-top:0">🎯 Desafíos activos</h3><div class="challenge"><div><strong>Camina 10.000 pasos</strong><small>Reto de actividad</small></div><div class="points">+250 pts</div></div><div class="challenge"><div><strong>Hidrátate 8 veces</strong><small id="challengeWaterText">0 de 8</small></div><div class="points">+100 pts</div></div></div>
+    <div class="card box"><h3 style="margin-top:0">👥 Comunidad</h3><p style="color:var(--muted);font-size:13px">Reto semanal · Comparte tu progreso</p><div class="people"><div class="mini">A</div><div class="mini">M</div><div class="mini">S</div><div class="mini">J</div><div class="mini">+24</div></div><button class="btn" style="margin-top:20px;padding:9px 13px" onclick="showScreen('community')">Ver comunidad</button></div>
+    <div class="card box" onclick="showScreen('progress')" style="cursor:pointer"><h3 style="margin-top:0">📊 Progreso semanal</h3><div class="chart"><div class="col" style="height:45%"></div><div class="col" style="height:65%"></div><div class="col" style="height:52%"></div><div class="col" style="height:78%"></div><div class="col" style="height:60%"></div><div class="col" style="height:82%"></div><div class="col" style="height:95%"></div></div><div class="days"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div></div>
+  </section>
+</section>
+
+<section id="screen-hydration" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Bienestar físico</div><h2>💧 Hidratación</h2><p>Registra tus vasos durante el día.</p></div></div><div class="module-grid"><div class="card module-card"><div class="kicker">Agua de hoy</div><div class="big-number" id="waterCount">0 / 8</div><p style="color:var(--muted)">vasos registrados</p><div class="progress-track"><div id="waterBar" class="progress-fill" style="width:0%;background:#28b9ff"></div></div><div class="counter-row"><button class="round-counter" onclick="changeWater(-1)">−</button><div class="counter-value" id="waterValue">0</div><button class="round-counter" onclick="changeWater(1)">+</button></div><div class="action-row"><button class="action-btn" onclick="changeWater(1)">💧 Agregar vaso</button><button class="action-btn" onclick="resetWater()">Reiniciar</button></div><div id="waterMessage"></div></div><div class="card module-card"><h3>💡 Tu registro</h3><div class="tip-list"><div class="tip-item"><b id="waterStatusTitle">Aún no registras agua</b><span id="waterStatusText">Usa + para comenzar.</span></div><div class="tip-item"><b>🎯 Referencia</b><span>La meta del prototipo es 8 vasos y podrá personalizarse posteriormente.</span></div></div></div></div></section>
+
+<section id="screen-activity" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Movimiento</div><h2>🏃 Actividad física</h2><p>Registra caminatas y minutos de ejercicio.</p></div></div><div class="module-grid"><div class="card module-card"><div class="kicker">Actividad de hoy</div><div class="big-number" id="activityCount">0 min</div><div class="progress-track"><div id="activityBar" class="progress-fill" style="width:0%"></div></div><div class="counter-section"><b>🚶 Caminata</b><div class="counter-row compact"><button class="round-counter" onclick="changeWalk(-5)">−</button><div class="counter-value"><span id="walkValue">0</span> min</div><button class="round-counter" onclick="changeWalk(5)">+</button></div></div><div class="counter-section"><b>🏋️ Ejercicio</b><div class="counter-row compact"><button class="round-counter" onclick="changeExercise(-5)">−</button><div class="counter-value"><span id="exerciseValue">0</span> min</div><button class="round-counter" onclick="changeExercise(5)">+</button></div></div><div class="action-row"><button class="action-btn" onclick="addActivity(10)">+10 min rápidos</button><button class="action-btn" onclick="resetActivity()">Reiniciar</button></div></div><div class="card module-card"><h3>📋 Registro de hoy</h3><div id="activityList" class="tip-list"></div></div></div></section>
+
+<section id="screen-sleep" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Descanso</div><h2>🌙 Sueño</h2><p>Registra tus horas y minutos de descanso.</p></div></div><div class="module-grid"><div class="card module-card"><div class="kicker">Sueño de hoy</div><div class="big-number" id="sleepCount">0 h 00 min</div><div class="progress-track"><div id="sleepBar" class="progress-fill" style="width:0%"></div></div><div class="counter-section"><b>Horas</b><div class="counter-row compact"><button class="round-counter" onclick="changeSleep(-1)">−</button><div class="counter-value"><span id="sleepHours">0</span> h</div><button class="round-counter" onclick="changeSleep(1)">+</button></div></div><div class="counter-section"><b>Minutos</b><div class="counter-row compact"><button class="round-counter" onclick="changeSleepMinutes(-15)">−</button><div class="counter-value"><span id="sleepMinutes">0</span> min</div><button class="round-counter" onclick="changeSleepMinutes(15)">+</button></div></div><div class="action-row"><button class="action-btn" onclick="resetSleep()">Reiniciar</button></div></div><div class="card module-card"><h3>🌙 Tu descanso</h3><div class="tip-list"><div class="tip-item"><b>Registro real</b><span>Introduce el tiempo que realmente descansaste.</span></div><div class="tip-item"><b>📊 Evolución</b><span>Más adelante guardaremos el historial en Supabase.</span></div></div></div></div></section>
+
+<section id="screen-nutrition" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Alimentación</div><h2>🥗 Alimentación</h2><p>Registra comidas del día.</p></div></div><div class="module-grid"><div class="card module-card"><div class="kicker">Registro del día</div><div class="big-number"><span id="mealCount">0</span> comidas</div><div class="choice-grid"><button class="choice" onclick="addMeal('Desayuno')"><b>🌅 Desayuno</b><span>Registrar comida</span></button><button class="choice" onclick="addMeal('Almuerzo')"><b>☀️ Almuerzo</b><span>Registrar comida</span></button><button class="choice" onclick="addMeal('Colación')"><b>🍎 Colación</b><span>Registrar comida</span></button><button class="choice" onclick="addMeal('Cena')"><b>🌙 Cena</b><span>Registrar comida</span></button></div><div class="action-row"><button class="action-btn" onclick="resetMeals()">Reiniciar día</button></div></div><div class="card module-card"><h3>🍽️ Registros</h3><div id="mealList" class="tip-list"></div><p style="color:var(--muted);font-size:11px;line-height:1.45">Esta versión registra comidas sin convertir calorías en una meta rígida.</p></div></div></section>
+
+<section id="screen-emotional" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Bienestar emocional</div><h2>❤️ Conócete hoy</h2><p>Un check-in sencillo para reconocer cómo estás.</p></div></div><div class="module-grid"><div class="card module-card"><h3>¿Cómo te sientes hoy?</h3><div class="mood-grid"><button class="mood-btn" onclick="answerMood('Muy bien',100)"><span>😁</span><small>Muy bien</small></button><button class="mood-btn" onclick="answerMood('Bien',90)"><span>🙂</span><small>Bien</small></button><button class="mood-btn" onclick="answerMood('Regular',70)"><span>😐</span><small>Regular</small></button><button class="mood-btn" onclick="answerMood('Cansado',55)"><span>😮‍💨</span><small>Cansado</small></button><button class="mood-btn" onclick="answerMood('Estresado',45)"><span>😣</span><small>Estresado</small></button></div><h3 style="margin-top:24px">¿Qué necesitas hoy?</h3><div class="choice-grid"><button class="choice" onclick="answerNeed('Descansar')"><b>😴 Descansar</b><span>Bajar el ritmo</span></button><button class="choice" onclick="answerNeed('Moverme')"><b>🏃 Moverme</b><span>Activarme</span></button><button class="choice" onclick="answerNeed('Conectar')"><b>🤝 Conectar</b><span>Compartir</span></button><button class="choice" onclick="answerNeed('Un momento para mí')"><b>🧘 Pausa</b><span>Un momento para mí</span></button></div><div id="emotionalMessage" style="margin-top:12px;font-size:11px"></div></div><div class="card module-card"><h3>🌱 Tu resumen</h3><div class="tip-list"><div class="tip-item"><b>Estado</b><span id="emotionSummary">Todavía no has respondido.</span></div><div class="tip-item"><b>Necesidad</b><span id="needSummary">Todavía no has respondido.</span></div></div><button class="action-btn" style="margin-top:15px" onclick="saveEmotionalCheck()">✓ Guardar check-in</button></div></div></section>
+
+<section id="screen-profile" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Tu identidad VIVE+</div><h2>👤 Mi perfil</h2><p>Completa tus datos para personalizar tu experiencia.</p></div></div><div class="profile-grid"><div class="card module-card"><div class="profile-head"><div class="profile-avatar">👤</div><div><div class="kicker">Perfil personal</div><h3 id="profileGreeting" style="margin:5px 0">Mi perfil VIVE+</h3><span class="profile-badge">Cuenta Supabase</span></div></div><div class="profile-form" style="margin-top:22px"><div class="field"><label>Nombre</label><input id="profileName" type="text" placeholder="Tu nombre"></div><div class="field"><label>Edad</label><input id="profileAge" type="number" min="13" max="120" placeholder="Edad"></div><div class="field full"><label>Trabajo / actividad diaria</label><select id="profileWork"><option value="">Selecciona una opción</option><option>Principalmente sentado/a</option><option>De pie gran parte del día</option><option>Trabajo físicamente activo</option><option>Estudio</option><option>Otro</option></select></div><div class="field full"><label>Objetivo de bienestar</label><select id="profileGoal"><option>Sentirme con más energía</option><option>Mejorar mis hábitos</option><option>Ser más activo/a</option><option>Mejorar mi descanso</option><option>Mejorar mi alimentación</option><option>Reducir el estrés</option></select></div></div><div class="profile-note" style="margin-top:15px">🔒 El acceso de la cuenta se gestiona con Supabase. En el siguiente paso conectaremos esta ficha a una tabla de perfiles para guardar estos datos en la nube.</div><div class="action-row"><button class="action-btn" onclick="saveProfile()">✓ Guardar perfil</button></div><div id="profileMessage" style="font-size:11px;margin-top:10px"></div></div><div class="card module-card"><div class="kicker">Cuenta</div><h3 id="accountEmail">—</h3><div class="profile-result"><div class="result-item"><b>🔐 Autenticación</b><span>Tu cuenta está protegida por Supabase Auth.</span></div><div class="result-item"><b>📱 VIVE+ mobile-first</b><span>Esta interfaz está preparada para usarse principalmente desde el celular.</span></div><div class="result-item"><b>🚀 Próximo paso</b><span>Guardar perfil, hábitos, puntos y progreso en Supabase.</span></div></div></div></div></section>
+
+<section id="screen-vive-score" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Análisis personalizado</div><h2>🧠 Análisis VIVE+</h2><p>Un resumen orientativo basado en tus registros.</p></div></div><div class="card analysis-card"><div class="vive-score"><div class="score-circle" id="scoreCircle"><div class="score-inner"><strong id="viveScore">0</strong><span>/ 100</span></div></div><div class="score-status"><div class="kicker">Análisis de hoy</div><h3 id="viveStatus">🟢 Comenzando</h3><p id="viveSummary">Registra tus hábitos para obtener un resumen.</p><div class="action-row"><button class="action-btn" onclick="analyzeVive()">🔄 Actualizar</button></div></div></div><div class="section-title"><h3>📊 Tus áreas hoy</h3><span>Actualizado</span></div><div class="area-grid"><div class="area-card"><b>💧 <span id="scoreWater">0%</span></b><span>Hidratación</span><small id="waterAdvice">—</small></div><div class="area-card"><b>🏃 <span id="scoreActivity">0%</span></b><span>Actividad</span><small id="activityAdvice">—</small></div><div class="area-card"><b>🌙 <span id="scoreSleep">0%</span></b><span>Sueño</span><small id="sleepAdvice">—</small></div><div class="area-card"><b>🥗 <span id="scoreMeals">0%</span></b><span>Alimentación</span><small id="mealAdvice">—</small></div><div class="area-card"><b>❤️ <span id="scoreMood">70%</span></b><span>Emocional</span><small id="moodAdvice">—</small></div></div></div><div class="section-title"><h3>🎯 Consejos para tu día</h3></div><div class="card analysis-card"><div id="dailyAdvice" class="tip-list"></div></div><div class="card module-card" style="margin-top:14px"><h3>ℹ️ Importante</h3><p style="color:var(--muted);line-height:1.5;margin-bottom:0">Este análisis es orientativo y no reemplaza una evaluación profesional de salud.</p></div></section>
+
+<section id="screen-habits" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Tu misión de hoy</div><h2>🌱 Pequeños hábitos, grandes cambios</h2><p>Pequeñas acciones que puedes convertir en rutina.</p></div></div><div class="module-grid"><div class="card module-card"><div class="tip-list"><div class="tip-item"><b>💧 Toma agua regularmente</b><span>Mantén una botella cerca y registra tus vasos.</span></div><div class="tip-item"><b>🚶 Muévete un poco más</b><span>Caminar, estirarte o practicar un deporte puede sumar.</span></div><div class="tip-item"><b>😴 Cuida tu descanso</b><span>Intenta mantener una rutina sostenible.</span></div><div class="tip-item"><b>🎯 Empieza pequeño</b><span>Elige una acción sencilla y repítela con constancia.</span></div></div></div><div class="card module-card"><h3>⭐ Tu progreso</h3><div class="big-number">Hoy</div><p style="color:var(--muted)">Cada pequeño paso suma.</p><button class="action-btn" onclick="toast('🌟 ¡Excelente! Sigue avanzando.')">✓ Marcar misión</button></div></div></section>
+
+<section id="screen-challenges" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Gamificación</div><h2>🎯 Desafíos activos</h2><p>Retos para mantenerte motivado.</p></div></div><div class="bottom-grid"><div class="card box"><h3>🏃 Camina 10.000 pasos</h3><p style="color:var(--muted)">Desafío de actividad.</p><div class="progress-track"><div class="progress-fill" style="width:65%"></div></div><b>6.500 / 10.000 pasos</b><div class="points" style="margin-top:12px">+250 pts</div></div><div class="card box"><h3>💧 Hidrátate 8 veces</h3><p style="color:var(--muted)">Tu progreso de hidratación.</p><div class="progress-track"><div id="challengeWaterBar" class="progress-fill" style="width:0%"></div></div><b id="challengeWaterNumber">0 / 8 vasos</b><div class="points" style="margin-top:12px">+100 pts</div></div><div class="card box"><h3>🔥 Mantén tu racha</h3><p style="color:var(--muted)">La racha real se conectará a Supabase en la siguiente etapa.</p><div class="big-number">7 🔥</div></div></div></section>
+
+<section id="screen-community" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Comunidad VIVE+</div><h2>👥 Comunidad</h2><p>Comparte tus avances y participa en retos.</p></div></div><div class="module-grid"><div class="card module-card"><h3>🏆 Reto semanal</h3><p style="color:var(--muted)">Muévete, registra tus hábitos y comparte tu progreso.</p><div class="people" style="margin:20px 0"><div class="mini">A</div><div class="mini">M</div><div class="mini">S</div><div class="mini">J</div><div class="mini">+24</div></div><button class="btn" onclick="toast('👥 Te has unido al reto semanal.')">Unirme al reto →</button></div><div class="card module-card"><h3>🌟 Actividad</h3><div class="tip-list"><div class="tip-item"><b>Comunidad VIVE+</b><span>Esta sección se conectará a usuarios reales posteriormente.</span></div></div></div></div></section>
+
+<section id="screen-progress" class="screen"><div class="screen-header"><button class="back-btn" onclick="showScreen('home')">← Volver</button><div class="screen-title"><div class="kicker">Tu evolución</div><h2>📊 Progreso semanal</h2><p>Observa cómo avanzan tus hábitos.</p></div></div><div class="module-grid"><div class="card module-card"><h3>📈 Actividad de la semana</h3><div class="chart" style="height:190px"><div class="col" style="height:45%"></div><div class="col" style="height:65%"></div><div class="col" style="height:52%"></div><div class="col" style="height:78%"></div><div class="col" style="height:60%"></div><div class="col" style="height:82%"></div><div class="col" style="height:95%"></div></div><div class="days"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div></div><div class="card module-card"><h3>🏆 Tus números</h3><div class="tip-list"><div class="tip-item"><b id="progressScore">0 ⭐</b><span>Estado VIVE+ de hoy</span></div><div class="tip-item"><b>🔥</b><span>La racha se conectará a Supabase.</span></div><div class="tip-item"><b>5 áreas</b><span>Hidratación, actividad, sueño, alimentación y emocional.</span></div></div></div></div></section>
+</main>
+</div>
+
+<nav class="mobile-nav">
+<button class="active" onclick="mobileHome(this)">🏠<b>Inicio</b></button>
+<button onclick="showScreen('habits')">✓<b>Hábitos</b></button>
+<button onclick="showScreen('challenges')">🎯<b>Desafíos</b></button>
+<button onclick="showScreen('community')">👥<b>Comunidad</b></button>
+<button onclick="showScreen('profile')">👤<b>Perfil</b></button>
+</nav>
+<div id="toast" class="toast"></div>
+
+<script>
+/* ===== SUPABASE ===== */
+const SUPABASE_URL = 'https://kcklkebhmnqbhguyivby.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'TU_PUBLISHABLE_KEY';
+let supabaseClient = null;
+
+function supabaseReady(){
+  return SUPABASE_PUBLISHABLE_KEY && SUPABASE_PUBLISHABLE_KEY !== 'TU_PUBLISHABLE_KEY';
+}
+if(window.supabase && supabaseReady()){
+  supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+}
+
+/* ===== ESTADO LOCAL DEL PROTOTIPO ===== */
+let water=0,walk=0,exercise=0,sleep=0,sleepMinutes=0,meals=0;
+let mealHistory=[],activityHistory=[];
+let moodScore=70,selectedNeed='';
+let profile={name:'',age:'',work:'',goal:''};
+
+function toast(message){const t=document.getElementById('toast');t.textContent=message;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2500)}
+function showScreen(name,navButton){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ const target=document.getElementById('screen-'+name);if(target)target.classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(navButton){document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));navButton.classList.add('active')}
+ analyzeVive();
+}
+function mobileHome(btn){document.querySelectorAll('.mobile-nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');showScreen('home')}
+
+/* ===== AUTH ===== */
+let authMode='register';
+function setAuthMode(mode){
+ authMode=mode;
+ document.getElementById('tabRegister').classList.toggle('active',mode==='register');
+ document.getElementById('tabLogin').classList.toggle('active',mode==='login');
+ document.getElementById('authTitle').textContent=mode==='register'?'Crear mi cuenta':'Iniciar sesión';
+ document.getElementById('authSubtitle').textContent=mode==='register'?'Comienza tu experiencia de bienestar y guarda tus avances.':'Entra a tu cuenta VIVE+ y continúa donde quedaste.';
+ document.getElementById('authSubmit').textContent=mode==='register'?'Crear mi cuenta':'Entrar';
+ document.getElementById('authName').style.display=mode==='register'?'block':'none';
+ document.getElementById('authPassword').setAttribute('autocomplete',mode==='register'?'new-password':'current-password');
+ document.getElementById('authMessage').textContent='';
+}
+async function handleAuth(e){
+ e.preventDefault();
+ const msg=document.getElementById('authMessage');
+ if(!supabaseClient){
+   msg.textContent='⚠️ Falta colocar la Publishable key de Supabase en el código.';
+   return;
+ }
+ const email=document.getElementById('authEmail').value.trim();
+ const password=document.getElementById('authPassword').value;
+ const name=document.getElementById('authName').value.trim();
+ msg.textContent='Conectando...';
+ try{
+   if(authMode==='register'){
+     const {data,error}=await supabaseClient.auth.signUp({
+       email,password,
+       options:{data:{display_name:name||'Usuario VIVE+'}}
+     });
+     if(error)throw error;
+     if(data.session){
+       await enterApp(data.user);
+     }else{
+       msg.textContent='✅ Cuenta creada. Revisa tu correo para confirmar la cuenta y luego inicia sesión.';
+     }
+   }else{
+     const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+     if(error)throw error;
+     await enterApp(data.user);
+   }
+ }catch(err){
+   msg.textContent='⚠️ '+(err.message||'No se pudo completar la operación.');
+ }
+}
+async function enterApp(user){
+ document.getElementById('authScreen').style.display='none';
+ document.getElementById('appRoot').style.display='grid';
+ document.getElementById('accountEmail').textContent=user?.email||'Cuenta VIVE+';
+ const name=user?.user_metadata?.display_name||'Usuario';
+ document.getElementById('homeName').textContent=name;
+ document.getElementById('topName').textContent=name;
+ document.getElementById('topAvatar').textContent=(name[0]||'V').toUpperCase();
+ document.getElementById('profileName').value=name==='Usuario'?'':name;
+ document.getElementById('profileGreeting').textContent=name==='Usuario'?'Mi perfil VIVE+':`Hola, ${name}`;
+ toast('👋 Bienvenido a VIVE+');
+ analyzeVive();
+}
+async function signInWithGoogle(){
+  const msg=document.getElementById('authMessage');
+  if(!supabaseClient){
+    msg.textContent='⚠️ Falta colocar la Publishable key de Supabase.';
+    return;
+  }
+  msg.textContent='Abriendo Google...';
+  const redirectTo=window.location.origin+window.location.pathname;
+  const {error}=await supabaseClient.auth.signInWithOAuth({
+    provider:'google',
+    options:{redirectTo}
+  });
+  if(error) msg.textContent='⚠️ '+(error.message||'No se pudo iniciar sesión con Google.');
+}
+async function logout(){
+ if(supabaseClient)await supabaseClient.auth.signOut();
+ document.getElementById('appRoot').style.display='none';
+ document.getElementById('authScreen').style.display='flex';
+ document.getElementById('authEmail').value='';
+ document.getElementById('authPassword').value='';
+ document.getElementById('authMessage').textContent='';
+ setAuthMode('login');
+}
+async function initAuth(){
+ if(!supabaseClient){
+   document.getElementById('authMessage').textContent='ℹ️ VIVE+ está listo, pero falta pegar la Publishable key de Supabase.';
+   return;
+ }
+ const {data:{session}}=await supabaseClient.auth.getSession();
+ if(session)await enterApp(session.user);
+ supabaseClient.auth.onAuthStateChange((_event,session)=>{
+   if(session && document.getElementById('appRoot').style.display==='none')enterApp(session.user);
+ });
+}
+
+/* ===== HIDRATACIÓN ===== */
+function renderWater(){
+ document.getElementById('waterCount').textContent=water+' / 8';
+ document.getElementById('waterValue').textContent=water;
+ const pct=Math.min(water/8*100,100);
+ document.getElementById('waterBar').style.width=pct+'%';
+ document.getElementById('homeWater').textContent=Math.round(pct)+'%';
+ document.getElementById('homeWaterText').textContent=water+'/8 vasos';
+ document.getElementById('homeWaterBar').style.width=pct+'%';
+ document.getElementById('challengeWaterText').textContent=water+' de 8';
+ document.getElementById('challengeWaterNumber').textContent=water+' / 8 vasos';
+ document.getElementById('challengeWaterBar').style.width=pct+'%';
+ document.getElementById('waterStatusTitle').textContent=water===0?'Aún no registras agua':water>=8?'🎉 Referencia alcanzada':'💧 Registro en progreso';
+ document.getElementById('waterStatusText').textContent=water===0?'Usa + para comenzar.':water>=8?'Has llegado a la referencia del prototipo.':'Llevas '+water+' vaso'+(water===1?'':'s')+'.';
+}
+function changeWater(delta){water=Math.max(0,Math.min(20,water+delta));renderWater();analyzeVive()}
+function resetWater(){water=0;renderWater();analyzeVive()}
+
+/* ===== ACTIVIDAD ===== */
+function renderActivity(){
+ const total=walk+exercise,pct=Math.min(total/60*100,100);
+ document.getElementById('activityCount').textContent=total+' min';
+ document.getElementById('walkValue').textContent=walk;
+ document.getElementById('exerciseValue').textContent=exercise;
+ document.getElementById('activityBar').style.width=pct+'%';
+ document.getElementById('homeActivityText').textContent=total+'/60 min';
+ document.getElementById('homeActivityBar').style.width=pct+'%';
+ document.getElementById('activityList').innerHTML=activityHistory.length?activityHistory.slice(0,8).map(x=>`<div class="tip-item"><b>🏃 Actividad</b><span>${x} minutos registrados.</span></div>`).join(''):'<div class="tip-item"><b>Sin actividades registradas</b><span>Agrega minutos usando los controles.</span></div>';
+}
+function changeWalk(d){walk=Math.max(0,walk+d);renderActivity();analyzeVive()}
+function changeExercise(d){exercise=Math.max(0,exercise+d);renderActivity();analyzeVive()}
+function addActivity(m){exercise+=m;activityHistory.unshift(m);renderActivity();analyzeVive()}
+function resetActivity(){walk=0;exercise=0;activityHistory=[];renderActivity();analyzeVive()}
+
+/* ===== SUEÑO ===== */
+function renderSleep(){
+ const total=sleep*60+sleepMinutes,h=Math.floor(total/60),m=total%60,pct=Math.min(total/480*100,100);
+ document.getElementById('sleepCount').textContent=h+' h '+String(m).padStart(2,'0')+' min';
+ document.getElementById('sleepHours').textContent=sleep;
+ document.getElementById('sleepMinutes').textContent=sleepMinutes;
+ document.getElementById('sleepBar').style.width=pct+'%';
+ document.getElementById('homeSleep').textContent=Math.round(pct)+'%';
+ document.getElementById('homeSleepText').textContent=h+' h '+String(m).padStart(2,'0');
+ document.getElementById('homeSleepBar').style.width=pct+'%';
+}
+function changeSleep(d){sleep=Math.max(0,Math.min(24,sleep+d));renderSleep();analyzeVive()}
+function changeSleepMinutes(d){let total=Math.max(0,Math.min(1440,sleep*60+sleepMinutes+d));sleep=Math.floor(total/60);sleepMinutes=total%60;renderSleep();analyzeVive()}
+function resetSleep(){sleep=0;sleepMinutes=0;renderSleep();analyzeVive()}
+
+/* ===== ALIMENTACIÓN ===== */
+function addMeal(type){meals++;mealHistory.unshift(type);document.getElementById('mealCount').textContent=meals;document.getElementById('homeMealsText').textContent=meals+'/5 comidas';document.getElementById('homeMealsBar').style.width=Math.min(meals/5*100,100)+'%';document.getElementById('mealList').innerHTML=mealHistory.map(x=>`<div class="tip-item"><b>🥗 ${x}</b><span>Registrado hoy.</span></div>`).join('');analyzeVive()}
+function resetMeals(){meals=0;mealHistory=[];document.getElementById('mealCount').textContent='0';document.getElementById('homeMealsText').textContent='0/5 comidas';document.getElementById('homeMealsBar').style.width='0%';document.getElementById('mealList').innerHTML='';analyzeVive()}
+
+/* ===== EMOCIONAL ===== */
+function answerMood(label,score){moodScore=score;document.getElementById('emotionSummary').textContent=label;document.getElementById('emotionalMessage').textContent='❤️ Estado registrado: '+label;analyzeVive()}
+function answerNeed(need){selectedNeed=need;document.getElementById('needSummary').textContent=need;document.getElementById('emotionalMessage').textContent='🌱 Necesidad registrada: '+need}
+function saveEmotionalCheck(){toast('❤️ Check-in emocional guardado en esta sesión.');analyzeVive()}
+
+/* ===== PERFIL ===== */
+function saveProfile(){
+ const name=document.getElementById('profileName').value.trim();
+ profile={name,age:document.getElementById('profileAge').value,work:document.getElementById('profileWork').value,goal:document.getElementById('profileGoal').value};
+ document.getElementById('profileGreeting').textContent=name?`Hola, ${name}`:'Mi perfil VIVE+';
+ document.getElementById('homeName').textContent=name||'vamos a vivir mejor';
+ document.getElementById('topName').textContent=name||'VIVE+';
+ document.getElementById('topAvatar').textContent=(name[0]||'V').toUpperCase();
+ document.getElementById('profileMessage').textContent='✓ Datos actualizados en esta versión. El guardado en tabla Supabase será el siguiente paso.';
+ toast('👤 Perfil actualizado');
+}
+
+/* ===== ANÁLISIS ===== */
+function currentScores(){
+ const waterScore=Math.round(Math.min(water/8,1)*100);
+ const activityScore=Math.round(Math.min((walk+exercise)/60,1)*100);
+ const sleepScore=Math.round(Math.min((sleep*60+sleepMinutes)/480,1)*100);
+ const mealScore=Math.round(Math.min(meals/5,1)*100);
+ const score=Math.round(waterScore*.20+activityScore*.20+sleepScore*.25+mealScore*.20+moodScore*.15);
+ return{score,water:waterScore,activity:activityScore,sleep:sleepScore,meals:mealScore,mood:moodScore};
+}
+function analyzeVive(){
+ const s=currentScores();
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+ set('viveScore',s.score);set('homeScore',s.score);set('scoreWater',s.water+'%');set('scoreActivity',s.activity+'%');set('scoreSleep',s.sleep+'%');set('scoreMeals',s.meals+'%');set('scoreMood',s.mood+'%');set('homeMoodText',s.mood+'% orientativo');
+ set('waterAdvice',s.water<75?'Prioridad':'Bien');set('activityAdvice',s.activity<75?'Prioridad':'Bien');set('sleepAdvice',s.sleep<80?'Prioridad':'Bien');set('mealAdvice',s.meals<75?'Prioridad':'Bien');set('moodAdvice',s.mood<70?'Prioridad':'Bien');
+ let status=s.score<55?'🟠 Necesitas cuidarte más hoy':s.score<75?'🟡 Hay áreas para mejorar':'🟢 Buen equilibrio';
+ set('viveStatus',status);
+ const priorities=[];if(s.water<75)priorities.push('hidratación');if(s.sleep<80)priorities.push('descanso');if(s.activity<75)priorities.push('movimiento');if(s.meals<75)priorities.push('alimentación');if(s.mood<70)priorities.push('bienestar emocional');
+ set('viveSummary',priorities.length?'VIVE+ sugiere poner atención primero en '+priorities.slice(0,2).join(' y ')+'.':'Tus registros muestran un buen equilibrio general. Mantén hábitos que puedas sostener.');
+ const advice=[];
+ advice.push(['💧 Hidratación',s.water<75?'Registra agua durante el día y distribuye tus vasos.':'Tu hidratación va bien; continúa registrándola.']);
+ advice.push(['🏃 Actividad',s.activity<75?'Puedes sumar movimiento que disfrutes y que sea apropiado para ti.':'Tu actividad está bien encaminada.']);
+ advice.push(['🌙 Sueño',s.sleep<80?'Cuida una rutina de descanso constante.':'Tu registro de sueño está cerca de la referencia.']);
+ advice.push(['🥗 Alimentación',s.meals<75?'Registra tus comidas y busca variedad y suficiente alimentación.':'Tu registro de comidas va bien; busca variedad.']);
+ advice.push(['❤️ Emocional',s.mood<70?'Considera una pausa, descanso o conexión con alguien de confianza.':'Reserva pequeños momentos para ti.']);
+ const list=document.getElementById('dailyAdvice');if(list)list.innerHTML=advice.map(a=>`<div class="analysis-item"><b>${a[0]}</b><span>${a[1]}</span></div>`).join('');
+ const circle=document.getElementById('scoreCircle');if(circle)circle.style.background=`conic-gradient(#27d47b 0 ${s.score}%,#e4efed ${s.score}% 100%)`;
+ set('progressScore',s.score+' ⭐');
+ renderWater();renderActivity();renderSleep();
+}
+
+/* ===== ARRANQUE ===== */
+renderWater();renderActivity();renderSleep();document.getElementById('mealList').innerHTML='';
+document.getElementById('profileGoal').value='Sentirme con más energía';
+setAuthMode('register');
+initAuth();
+</script>
+
+<script>
+if('serviceWorker' in navigator){
+ window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
